@@ -1,6 +1,8 @@
 $ucf-gold: #fc0;
 $green: #49b753;
 $gray: #929497;
+$white: #fff;
+$red: #d6272f;
 
 @mixin no-font-smoothing() {
   -moz-osx-font-smoothing: auto;
@@ -46,6 +48,7 @@ $gray: #929497;
     margin: 0;
   }
 
+  // Callouts
   .callout {
     box-shadow: 0 0 0 0 transparent;
     padding: 20px 20px 30px;
@@ -57,5 +60,35 @@ $gray: #929497;
 
   .callout-lightest {
     background-color: #fff;
+  }
+
+  // Colors
+  .ucf-gold {
+    color: $ucf-gold;
+  }
+
+  .green {
+    color: $green;
+  }
+
+  .gray {
+    color: $gray;
+  }
+
+  .white {
+    color: $white;
+  }
+
+  .red {
+    color: $red;
+  }
+
+  // Generic text styles
+  .text-light {
+    @include gotham-xlight();
+  }
+
+  .text-uppercase {
+    text-transform: uppercase;
   }
 }
