@@ -27,3 +27,4 @@ static/bower_components/*
 
 # Sass stuff
 static/scss/.sass-cache/*
+dev/.sass-cache/*

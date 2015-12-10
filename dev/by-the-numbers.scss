@@ -1,0 +1,61 @@
+$ucf-gold: #fc0;
+$green: #49b753;
+$gray: #929497;
+
+@mixin no-font-smoothing() {
+  -moz-osx-font-smoothing: auto;
+  -webkit-font-smoothing: auto;
+}
+
+@mixin gotham-xlight() {
+  @include no-font-smoothing();
+  font-family: 'Gotham SSm 2r','Gotham SSm A','Gotham SSm B';
+  font-style: normal;
+  font-weight: 200;
+}
+
+@mixin gotham-bold() {
+  @include no-font-smoothing();
+  font-family: 'Gotham SSm 7r', 'Gotham SSm A', 'Gotham SSm B';
+  font-style: normal;
+  font-weight: 700;
+}
+
+@mixin gotham-black() {
+  @include no-font-smoothing();
+  font-family: 'Gotham SSm 8r', 'Gotham SSm A', 'Gotham SSm B';
+  font-style: normal;
+  font-weight: 800;
+}
+
+
+.page-base h1 {
+  @media (max-width: 767px) {
+    padding: 0 20px;
+  }
+}
+
+.page-content {
+  font-family: 'Gotham SSm 4r','Gotham SSm A','Gotham SSm B';
+  font-style: normal;
+  font-weight: 400;
+  padding-left: 0;
+  padding-right: 0;
+
+  figure {
+    margin: 0;
+  }
+
+  .callout {
+    box-shadow: 0 0 0 0 transparent;
+    padding: 20px 20px 30px;
+  }
+
+  .callout-light {
+    background-color: #fef7e1;
+  }
+
+  .callout-lightest {
+    background-color: #fff;
+  }
+}
