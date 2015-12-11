@@ -48,8 +48,6 @@
         boxHeight = $box.height(),
         delay = parseInt($boxInner.attr('data-delay'), 10) || 0;
 
-    console.log(delay);
-
     $box.css('height', boxHeight);
 
     $boxInner
