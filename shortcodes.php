@@ -479,6 +479,14 @@ function sc_chart( $attr ) {
 
 	$class = $attr['class'] ? 'custom-chart ' . $class : 'custom-chart';
 
+	// Lazy protocol replacing for CORS compatibility
+	$proto = is_ssl() ? 'https://' : 'http://';
+	$proto_replace = is_ssl() ? 'http://' : 'https://';
+	$json = str_replace( $proto_replace, $proto, $json );
+	if ( $options ) {
+		$options = str_replace( $proto_replace, $proto, $options );
+	}
+
 	ob_start();
 
 	?>
