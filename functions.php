@@ -181,10 +181,20 @@ function display_social($url, $title) {
         </a>
         <a class="share-email" target="_blank" data-button-target="<?php echo $url; ?>" href="mailto:?subject=<?php echo $title; ?>&amp;body=Check out this story on www.ucf.edu.%0A%0A<?php echo $url; ?>" title="Share this story in an email">
         	Sahre "<?php echo $title; ?>" in an email
-        </a> 
+        </a>
     </aside>
     <?php
     return ob_get_clean();
 }
+
+
+/**
+ * Allow json files to be uploaded to the media library.
+ **/
+function uploads_allow_json( $mimes ) {
+	$mimes['json'] = 'application/json';
+	return $mimes;
+}
+add_filter( 'upload_mimes', 'uploads_allow_json' );
 
 ?>

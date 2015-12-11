@@ -466,4 +466,27 @@ function sc_social_share_buttons() {
 
 add_shortcode( 'social-share-buttons', 'sc_social_share_buttons' );
 
+
+function sc_chart( $attr ) {
+	$id = $attr['id'] ? $attr['id'] : 'custom-chart';
+	$type = $attr['type'] ? $attr['type'] : 'bar';
+	$json = $attr['data'] ? $attr['data'] : '';
+	$options = $attr['options'] ? $attr['options'] : '';
+
+	if ( empty( $json ) ) {
+		return;
+	}
+
+	$class = $attr['class'] ? 'custom-chart ' . $class : 'custom-chart';
+
+	ob_start();
+
+	?>
+		<div id="<?php echo $id; ?>" class="<?php echo $class; ?>" data-chart-type="<?php echo $type; ?>" data-chart-data="<?php echo $json; ?>" <?php echo $options ? 'data-chart-options="' . $options . '"' : ''; ?>></div>
+	<?php
+
+	return ob_get_clean();
+}
+add_shortcode( 'chart', 'sc_chart' );
+
 ?>

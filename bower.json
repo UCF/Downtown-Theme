@@ -18,6 +18,7 @@
   "dependencies": {
     "FitText.js": "1.2.0",
     "bootstrap-sass-official": "v2.3.2.0",
-    "stellar": "v0.6.2"
+    "stellar": "v0.6.2",
+    "Chart.js": "chartjs#~1.0.2"
   }
 }

@@ -270,6 +270,12 @@ class Page extends CustomPostType {
 				'type' => 'file',
 			),
 			array(
+				'name' => 'Javascript',
+				'desc' => '',
+				'id' => $prefix.'javascript',
+				'type' => 'file',
+			),
+			array(
 				'name' => 'Featured image "Desktop" size override',
 				'desc' => 'Overrides the automatically generated "Desktop" size of the featured image for this page. Recommended image size: 1199x750px.',
 				'id' => $prefix.'image_d',
