@@ -1,0 +1,10 @@
+{
+    "segmentShowStroke" : true,
+    "segmentStrokeColor" : "#fff",
+    "segmentStrokeWidth" : 5,
+    "percentageInnerCutout" : 0,
+    "animationSteps" : 100,
+    "animationEasing" : "easeOutBounce",
+    "animateRotate" : true,
+    "showTooltips": false
+}

@@ -1,8 +1,10 @@
-$ucf-gold: #fc0;
+$ucf-gold: #F6C319;
 $green: #49b753;
 $gray: #929497;
 $white: #fff;
 $red: #d6272f;
+$stylized-border: 4px dotted #000;
+$stylized-border-light: 2px dotted #000;
 
 @mixin no-font-smoothing() {
   -moz-osx-font-smoothing: auto;
@@ -38,28 +40,111 @@ $red: #d6272f;
 }
 
 .page-content {
-  font-family: 'Gotham SSm 4r','Gotham SSm A','Gotham SSm B';
-  font-style: normal;
-  font-weight: 400;
   padding-left: 0;
   padding-right: 0;
+
+  &,
+  p,
+  ol,
+  ul,
+  li {
+    font-family: 'Gotham SSm 4r','Gotham SSm A','Gotham SSm B';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.4;
+
+    @media (max-width: 979px) {
+      font-size: 16px;
+    }
+  }
 
   figure {
     margin: 0;
   }
 
-  // Callouts
+  // Callouts, utils
   .callout {
     box-shadow: 0 0 0 0 transparent;
     padding: 20px 20px 30px;
+
+    &.callout-light {
+      &,
+      .fig-heading-bordered span {
+        background-color: #fef7e1;
+      }
+    }
+
+    &.callout-lightest {
+      &,
+      .fig-heading-bordered span {
+        background-color: $white;
+      }
+    }
+
+    .fig-heading-bordered span {
+      background-color: $ucf-gold;
+    }
   }
 
-  .callout-light {
-    background-color: #fef7e1;
-  }
+  .table-cell-wrap {
+    display: table-row;
 
-  .callout-lightest {
-    background-color: #fff;
+    @media (max-width: 767px) {
+      display: block;
+    }
+
+    > * {
+      display: table-cell;
+      padding-left: 10px;
+      padding-right: 10px;
+      vertical-align: middle;
+
+      @media (max-width: 979px) {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      @media (max-width: 767px) {
+        display: block;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    > :first-child {
+      padding-left: 0;
+    }
+
+    > :last-child {
+      padding-right: 0;
+    }
+
+    &.align-top {
+      > * {
+        vertical-align: top;
+      }
+    }
+
+    .vertical-divider {
+      height: 100%;
+      position: relative;
+      width: 0;
+
+      @media (max-width: 767px) {
+        display: none;
+      }
+
+      &:before {
+        border-left: $stylized-border-light;
+        bottom: 0;
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        width: 0;
+      }
+    }
   }
 
   // Colors
@@ -88,7 +173,185 @@ $red: #d6272f;
     @include gotham-xlight();
   }
 
+  .text-heavy {
+    @include gotham-black();
+  }
+
   .text-uppercase {
     text-transform: uppercase;
   }
+
+  .text-center-mobile {
+    @media (max-width: 767px) {
+      text-align: center;
+    }
+  }
+
+  // Detailed text styles
+  .fig-heading,
+  .fig-heading-big,
+  .fig-label,
+  .fig-label-big,
+  .fig-label-bigger,
+  .number,
+  .number-small {
+    @include gotham-black();
+  }
+
+  .fig-heading {
+    font-size: 24px;
+
+    @media (max-width: 979px) {
+      font-size: 22px;
+    }
+  }
+
+  .fig-heading-big {
+    font-size: 36px;
+
+    @media (max-width: 979px) {
+      font-size: 30px;
+    }
+  }
+
+  .fig-heading-bordered {
+    font-size: 28px;
+    line-height: 1;
+    position: relative;
+
+    @media (max-width: 979px) {
+      font-size: 22px;
+    }
+
+    @media (max-width: 767px) {
+      border-bottom: $stylized-border-light;
+      padding-bottom: 2px;
+    }
+
+    &:before {
+      border-bottom: $stylized-border;
+      bottom: 0;
+      content: '';
+      display: block;
+      height: 14px; // 1/2 of .fig-heading-bordered line height
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%;
+      z-index: 1;
+
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+
+    span {
+      background-color: $white;
+      padding: 0 10px;
+      position: relative;
+      z-index: 2;
+
+      @media (max-width: 767px) {
+        background-color: transparent !important; // necessary for greater specificity inside of callouts
+      }
+    }
+  }
+
+  .fig-label {
+    font-size: 20px;
+    line-height: 1.2;
+
+    @media (max-width: 979px) {
+      font-size: 18px;
+    }
+  }
+
+  .fig-label-big {
+    font-size: 28px;
+    line-height: 1;
+
+    @media (max-width: 979px) {
+      font-size: 22px;
+    }
+  }
+
+  .fig-label-bigger {
+    font-size: 34px;
+    line-height: 1;
+
+    @media (min-width: 1200px) {
+      font-size: 40px;
+    }
+
+    @media (max-width: 979px) {
+      font-size: 24px;
+    }
+  }
+
+  .fig-details {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .number {
+    font-size: 75px;
+    letter-spacing: -.04em;
+    line-height: .85;
+
+    @media (min-width: 1200px) {
+      font-size: 85px;
+    }
+
+    @media (max-width: 979px) {
+      font-size: 58px;
+    }
+  }
+
+  .number-small {
+    font-size: 36px;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+  }
+
+  .number-denomination {
+    @include gotham-xlight();
+    font-size: 26px;
+    letter-spacing: .08em;
+
+    @media (max-width: 979px) {
+      font-size: 22px;
+    }
+  }
+
+  .dollar-box {
+    margin-bottom: 10px;
+    overflow: hidden;
+    position: relative;
+
+    .dollar-box-inner {
+      background-color: $white;
+      border: 4px solid $ucf-gold;
+      bottom: 0;
+      box-sizing: border-box;
+      height: 100%;
+      left: 0;
+      padding: 20px;
+      position: relative;
+      width: 100%;
+      z-index: 1;
+    }
+
+    &.dollar-box-inverse .dollar-box-inner {
+      background-color: $green;
+    }
+  }
+
+  // Images/media
+  .facilities-icon {
+    margin-bottom: 15px;
+    max-height: 220px;
+    max-width: 220px;
+  }
+
 }
