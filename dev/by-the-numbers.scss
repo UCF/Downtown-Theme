@@ -5,6 +5,7 @@ $white: #fff;
 $red: #d6272f;
 $stylized-border: 4px dotted #000;
 $stylized-border-light: 2px dotted #000;
+$stylized-border-light-bg: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAFElEQVQImWNgYGD4D8VwgCGAHwAA1W4D/S31AcsAAAAASUVORK5CYII=');
 
 @mixin no-font-smoothing() {
   -moz-osx-font-smoothing: auto;
@@ -127,22 +128,12 @@ $stylized-border-light: 2px dotted #000;
     }
 
     .vertical-divider {
+      background: $stylized-border-light-bg center center repeat-y;
       height: 100%;
-      position: relative;
-      width: 0;
+      width: 2px;
 
       @media (max-width: 767px) {
         display: none;
-      }
-
-      &:before {
-        border-left: $stylized-border-light;
-        bottom: 0;
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        width: 0;
       }
     }
   }

@@ -61,20 +61,12 @@
     .page-content .table-cell-wrap.align-top > * {
       vertical-align: top; }
     .page-content .table-cell-wrap .vertical-divider {
+      background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAFElEQVQImWNgYGD4D8VwgCGAHwAA1W4D/S31AcsAAAAASUVORK5CYII=") center center repeat-y;
       height: 100%;
-      position: relative;
-      width: 0; }
+      width: 2px; }
       @media (max-width: 767px) {
         .page-content .table-cell-wrap .vertical-divider {
           display: none; } }
-      .page-content .table-cell-wrap .vertical-divider:before {
-        border-left: 2px dotted #000;
-        bottom: 0;
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        width: 0; }
   .page-content .ucf-gold {
     color: #F6C319; }
   .page-content .green {
