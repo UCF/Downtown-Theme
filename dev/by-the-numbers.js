@@ -60,7 +60,10 @@
         duration: 800,
         easing: 'swing',
         done: function() {
-          $boxInner.css('position', '');
+          $boxInner.css({
+            'height': '',
+            'position': ''
+          });
           $box.css('height', '');
         }
       });
@@ -72,16 +75,19 @@
   // Removes itself as a binded event on the window object when all
   // elements in inviewElemsArray have had an 'inview' event fire once.
   function inviewWatcher() {
+    var newInviewElemsArray = [];
     if (inviewElemsArray.length) {
       for (var i = 0; i < inviewElemsArray.length; i++) {
         var $elem = inviewElemsArray[i];
         if ($elem.offset().top < $(window).scrollTop() + $(window).outerHeight()) {
           $elem.trigger('inview');
-
-          // Remove object from numsArray (only animate $elem once)
-          inviewElemsArray.splice(i, 1);
+        }
+        else {
+          newInviewElemsArray.push(i);
         }
       }
+
+      inviewElemsArray = newInviewElemsArray;
     }
     else {
       // Only listen on window load/scroll for as long as necessary (until all
