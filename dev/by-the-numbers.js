@@ -72,6 +72,19 @@
       });
   }
 
+  function animateNextSteps(e) {
+    var $step = $(e.target),
+        delay = parseInt($step.attr('data-delay'), 10) || 0;
+
+    $step.addClass('hidden');
+
+    window.setTimeout(function() {
+      $step
+        .addClass('slide-in-right fade-in')
+        .removeClass('hidden');
+    }, delay);
+  }
+
   // Fires the 'inview' event when any element in inviewElemsArray
   // (has class .inview) is visible in the viewport.
   //
@@ -106,6 +119,7 @@
     $(window).on('load scroll', inviewWatcher);
     $('.number-animated').on('inview', animateNumber);
     $('.dollar-box-inner').on('inview', animateDollarBox);
+    $('.next-step').on('inview', animateNextSteps);
   }
 
   $(init);

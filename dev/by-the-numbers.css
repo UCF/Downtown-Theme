@@ -1,8 +1,37 @@
+@-webkit-keyframes slide-in-right {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    visibility: visible; }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+@keyframes slide-in-right {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    visibility: visible; }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+.slide-in-right {
+  -webkit-animation-duration: .8s;
+  animation-duration: .8s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: slide-in-right;
+  animation-name: slide-in-right; }
+
+.fade-in {
+  opacity: 1;
+  transition: opacity .5s ease-in-out; }
+
 @media (max-width: 767px) {
   .page-base h1 {
     padding: 0 20px; } }
 
 .page-content {
+  overflow-x: hidden;
   padding-left: 0;
   padding-right: 0; }
   .page-content,
@@ -67,6 +96,17 @@
       @media (max-width: 767px) {
         .page-content .table-cell-wrap .vertical-divider {
           display: none; } }
+  .page-content .span20percent {
+    width: 172px; }
+    @media (min-width: 1200px) {
+      .page-content .span20percent {
+        width: 210px; } }
+    @media (max-width: 979px) {
+      .page-content .span20percent {
+        width: 128.8px; } }
+    @media (max-width: 767px) {
+      .page-content .span20percent {
+        width: 100%; } }
   .page-content .ucf-gold {
     color: #F6C319; }
   .page-content .green {
@@ -94,13 +134,23 @@
   @media (max-width: 767px) {
     .page-content .text-center-mobile {
       text-align: center; } }
+  .page-content .sr-only {
+    border: 0 none;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px; }
   .page-content .fig-heading,
   .page-content .fig-heading-big,
   .page-content .fig-label,
   .page-content .fig-label-big,
   .page-content .fig-label-bigger,
   .page-content .number,
-  .page-content .number-small {
+  .page-content .number-small,
+  .page-content .number-smaller {
     -moz-osx-font-smoothing: auto;
     -webkit-font-smoothing: auto;
     font-family: 'Gotham SSm 8r', 'Gotham SSm A', 'Gotham SSm B';
@@ -116,6 +166,8 @@
     @media (max-width: 979px) {
       .page-content .fig-heading-big {
         font-size: 30px; } }
+  .page-content .fig-heading-baseline-push {
+    margin-top: 21px; }
   .page-content .fig-heading-bordered {
     font-size: 28px;
     line-height: 1;
@@ -174,6 +226,17 @@
   .page-content .fig-details {
     font-size: 14px;
     margin-top: 10px; }
+  .page-content .fig-details-list {
+    list-style-type: none;
+    margin: 8px 0; }
+    .page-content .fig-details-list li {
+      display: block;
+      font-size: 16px;
+      line-height: 1.2;
+      margin-bottom: 6px; }
+      @media (max-width: 979px) {
+        .page-content .fig-details-list li {
+          font-size: 14px; } }
   .page-content .number {
     font-size: 75px;
     letter-spacing: -.04em;
@@ -185,6 +248,16 @@
       .page-content .number {
         font-size: 58px; } }
   .page-content .number-small {
+    font-size: 60px;
+    letter-spacing: -.03em;
+    line-height: .95; }
+    @media (min-width: 1200px) {
+      .page-content .number-small {
+        font-size: 65px; } }
+    @media (max-width: 979px) {
+      .page-content .number-small {
+        font-size: 45px; } }
+  .page-content .number-smaller {
     font-size: 36px;
     letter-spacing: -.02em;
     line-height: 1.1; }
@@ -199,6 +272,17 @@
     @media (max-width: 979px) {
       .page-content .number-denomination {
         font-size: 22px; } }
+  .page-content .number-denomination-small {
+    -moz-osx-font-smoothing: auto;
+    -webkit-font-smoothing: auto;
+    font-family: 'Gotham SSm 2r','Gotham SSm A','Gotham SSm B';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 22px;
+    letter-spacing: .08em; }
+    @media (max-width: 979px) {
+      .page-content .number-denomination-small {
+        font-size: 18px; } }
   .page-content .dollar-box {
     margin-bottom: 10px;
     overflow: hidden;
@@ -216,7 +300,10 @@
       z-index: 1; }
     .page-content .dollar-box.dollar-box-inverse .dollar-box-inner {
       background-color: #49b753; }
+  .page-content .next-step.hidden {
+    opacity: 0; }
   .page-content .facilities-icon {
-    margin-bottom: 15px;
-    max-height: 220px;
-    max-width: 220px; }
+    margin-bottom: 15px; }
+    @media (max-width: 767px) {
+      .page-content .facilities-icon {
+        max-width: 180px; } }
