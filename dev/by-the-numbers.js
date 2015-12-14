@@ -83,7 +83,7 @@
           $elem.trigger('inview');
         }
         else {
-          newInviewElemsArray.push(i);
+          newInviewElemsArray.push(inviewElemsArray[i]);
         }
       }
 
