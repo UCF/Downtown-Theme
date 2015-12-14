@@ -16,18 +16,21 @@
   // Animates increment of a number (no decimals). Handles commas.
   function animateNumber(e) {
     var $num = $(e.target),
-        numText = parseInt($num.text().replace(/\D/g, ''), 10);
+        numText = $num.text(),
+        numTextParsed = parseInt($num.text().replace(/\D/g, ''), 10);
 
     $num.css('width', $num.width()); // force fixed width to reduce flicker
 
-    $({number: 0}).animate({number: numText}, {
+    $({number: 0}).animate({number: numTextParsed}, {
       duration: 1500,
       easing: 'swing',
       step: function() {
         $num.text(commaSeparateNumber(Math.ceil(this.number)));
       },
       done: function() {
-        $num.css('width', ''); // removed forced width
+        $num
+          .text(numText) // sometimes the animation doesn't animate the last incremention for whatever reason, so force it
+          .css('width', ''); // removed forced width
       }
     });
   }
