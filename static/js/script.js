@@ -288,11 +288,12 @@ var socialButtonTracking = function($) {
 
 
 var customChart = function($) {
-  if ($('.custom-chart').length) {
-    $.each($('.custom-chart'), function() {
+  var $charts = $('.custom-chart');
+  if ($charts.length) {
+    $.each($charts, function() {
       var $chart = $(this);
       // Update id of chart if it is set to default.
-      if ($chart.attr('id') == 'custom-chart') {
+      if ($chart.attr('id') === 'custom-chart') {
         $chart.attr('id', 'custom-chart-' + idx);
       }
       var type = $(this).attr('data-chart-type'),
