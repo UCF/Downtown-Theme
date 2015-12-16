@@ -65,7 +65,7 @@
     .page-content .callout .fig-heading-bordered span {
       background-color: #F6C319; }
   .page-content .table-cell-wrap {
-    display: table-row; }
+    display: table; }
     @media (max-width: 767px) {
       .page-content .table-cell-wrap {
         display: block; } }
@@ -107,6 +107,9 @@
     @media (max-width: 767px) {
       .page-content .span20percent {
         width: 100%; } }
+  .page-content .center-block {
+    margin-left: auto;
+    margin-right: auto; }
   .page-content .ucf-gold {
     color: #F6C319; }
   .page-content .green {
@@ -148,6 +151,7 @@
   .page-content .fig-label,
   .page-content .fig-label-big,
   .page-content .fig-label-bigger,
+  .page-content .fig-label-small,
   .page-content .number,
   .page-content .number-small,
   .page-content .number-smaller {
@@ -223,6 +227,9 @@
     @media (max-width: 979px) {
       .page-content .fig-label-bigger {
         font-size: 24px; } }
+  .page-content .fig-label-small {
+    font-size: 18px;
+    line-height: 1.1; }
   .page-content .fig-details {
     font-size: 14px;
     margin-top: 10px; }
@@ -303,7 +310,9 @@
   .page-content .next-step.hidden {
     opacity: 0; }
   .page-content .facilities-icon {
-    margin-bottom: 15px; }
-    @media (max-width: 767px) {
+    margin-bottom: 15px;
+    max-width: 150px;
+    width: 100%; }
+    @media (min-width: 1200px) {
       .page-content .facilities-icon {
         max-width: 180px; } }

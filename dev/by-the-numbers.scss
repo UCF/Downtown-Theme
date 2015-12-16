@@ -134,7 +134,7 @@ $stylized-border-light-bg: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA
   }
 
   .table-cell-wrap {
-    display: table-row;
+    display: table;
 
     @media (max-width: 767px) {
       display: block;
@@ -199,6 +199,11 @@ $stylized-border-light-bg: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA
     }
   }
 
+  .center-block {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   // Colors
   .ucf-gold {
     color: $ucf-gold;
@@ -256,6 +261,7 @@ $stylized-border-light-bg: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA
   .fig-label,
   .fig-label-big,
   .fig-label-bigger,
+  .fig-label-small,
   .number,
   .number-small,
   .number-smaller {
@@ -355,6 +361,11 @@ $stylized-border-light-bg: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA
     @media (max-width: 979px) {
       font-size: 24px;
     }
+  }
+
+  .fig-label-small {
+    font-size: 18px;
+    line-height: 1.1;
   }
 
   .fig-details {
@@ -462,8 +473,10 @@ $stylized-border-light-bg: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA
   // Images/media
   .facilities-icon {
     margin-bottom: 15px;
+    max-width: 150px;
+    width: 100%;
 
-    @media (max-width: 767px) {
+    @media (min-width: 1200px) {
       max-width: 180px;
     }
   }
