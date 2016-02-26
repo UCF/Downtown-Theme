@@ -179,8 +179,8 @@ function display_social($url, $title) {
         <a class="share-linkedin" target="_blank" data-button-target="<?php echo $url; ?>" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $url; ?>&title=<?php echo $tweet_title; ?>" title="Share this story on Linkedin">
         	Share "<?php echo $title; ?>" on Linkedin
         </a>
-        <a class="share-email" target="_blank" data-button-target="<?php echo $url; ?>" href="mailto:?subject=<?php echo $title; ?>&amp;body=Check out this story on www.ucf.edu.%0A%0A<?php echo $url; ?>" title="Share this story in an email">
-        	Sahre "<?php echo $title; ?>" in an email
+        <a class="share-email" target="_blank" data-button-target="<?php echo $url; ?>" href="mailto:?subject=<?php echo $title; ?>&amp;body=Check out this article on www.ucf.edu.%0A%0A<?php echo $url; ?>" title="Share this article in an email">
+        	Share "<?php echo $title; ?>" in an email
         </a>
     </aside>
     <?php
