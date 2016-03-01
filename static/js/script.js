@@ -247,7 +247,7 @@ var styleGformButtons = function($) {
 var mobileNavToggle = function($) {
   $('nav.header-nav .mobile-nav-toggle')
     .on('click', function() {
-      $(this).parent().toggleClass('mobile-active');
+      $(this).parents('.header-nav').toggleClass('mobile-active');
     });
 }
 

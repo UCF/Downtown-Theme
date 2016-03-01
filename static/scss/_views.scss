@@ -351,8 +351,8 @@ button.btn {
   display: none;
   overflow: hidden;
   position: absolute;
-  right: 10px;
-  top: 15px;
+  right: 5px;
+  top: 5px;
   white-space: nowrap;
 }
 
@@ -573,6 +573,10 @@ footer nav {
       .hamburger {
         border-color: $alt-color;
       }
+    }
+
+    .container {
+      position: relative;
     }
 
     ul li {
