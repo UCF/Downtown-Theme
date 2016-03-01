@@ -49,17 +49,17 @@
 		</script>
 
 	</head>
-	<body class="<?=body_classes()?>">
+	<body class="<?php echo body_classes(); ?>">
 		<nav class="header-nav">
 			<div class="container">
 				<a class="mobile-nav-toggle" href="#"><div class="hamburger"></div>Menu</a>
-				<?=wp_nav_menu(array(
+				<?php wp_nav_menu( array(
 					'theme_location' => 'nav-menu',
 					'container' => false,
 					'menu_class' => 'menu '.get_header_styles(),
 					'menu_id' => 'header-menu',
 					'depth' => 1
-					));
+					) );
 				?>
 			</div>
 		</nav>
