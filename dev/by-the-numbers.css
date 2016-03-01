@@ -53,6 +53,12 @@
         font-size: 16px; } }
   .page-content figure {
     margin: 0; }
+  .page-content .table th,
+  .page-content .table td {
+    border-top: 1px solid #ddd; }
+  .page-content .table tbody > tr:first-child th,
+  .page-content .table tbody > tr:first-child td {
+    border-top: 0 solid transparent; }
   .page-content .callout {
     box-shadow: 0 0 0 0 transparent;
     padding: 20px 20px 30px; }

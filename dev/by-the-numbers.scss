@@ -109,6 +109,20 @@ $stylized-border-light-bg: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA
     margin: 0;
   }
 
+  .table {
+    th,
+    td {
+      border-top: 1px solid #ddd;
+    }
+
+    tbody > tr:first-child {
+      th,
+      td {
+        border-top: 0 solid transparent;
+      }
+    }
+  }
+
   // Callouts, utils
   .callout {
     box-shadow: 0 0 0 0 transparent;
