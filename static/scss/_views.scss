@@ -351,8 +351,8 @@ button.btn {
   display: none;
   overflow: hidden;
   position: absolute;
-  right: 10px;
-  top: 15px;
+  right: 5px;
+  top: 5px;
   white-space: nowrap;
 }
 
@@ -522,7 +522,7 @@ footer nav {
   }
 }
 
-@media all and (max-width: $medium-max-display - 1) {
+@media all and (max-width: $medium-max-display) {
   h1,
   .h1 {
     font-size: 38px;
@@ -544,7 +544,63 @@ footer nav {
     font-size: 28px;
   }
 
-  nav a { padding: 0 16px; }
+  nav a {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  nav ul li {
+    padding: 8px 0;
+  }
+
+
+  nav.header-nav {
+    height: 20px;
+    max-height: 20px;
+    overflow: hidden;
+    padding: 10px 0;
+    top: auto; // ucf header
+    transition: max-height .5s ease-in-out;
+
+    &.mobile-active {
+      height: auto;
+      max-height: 1000px; // Some high value to trigger the css transition (css transitions don't work when transitioning to value of 'auto')
+
+      .mobile-nav-toggle {
+        color: $alt-color;
+      }
+
+      .hamburger {
+        border-color: $alt-color;
+      }
+    }
+
+    .container {
+      position: relative;
+    }
+
+    ul li {
+      display: block;
+      margin: 3px 0;
+      width: 100%;
+
+      &:first-child {
+        padding-top: 35px;
+      }
+
+      a {
+        display: block;
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+      }
+    }
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+  }
+
 
   .callout blockquote,
   .callout blockquote p {
@@ -613,48 +669,6 @@ footer nav {
     padding-top: 0;
   }
 
-  nav.header-nav {
-    height: 20px;
-    max-height: 20px;
-    overflow: hidden;
-    top: auto; // ucf header
-    transition: max-height .5s ease-in-out;
-  }
-
-  .mobile-nav-toggle {
-    display: block;
-  }
-
-  nav.header-nav.mobile-active {
-    height: auto;
-    max-height: 1000px; // Some high value to trigger the css transition (css transitions don't work when transitioning to value of 'auto')
-  }
-
-  nav.header-nav.mobile-active .mobile-nav-toggle {
-    color: $alt-color;
-  }
-
-  nav.header-nav.mobile-active .hamburger {
-    border-color: $alt-color;
-  }
-
-  nav.header-nav ul li {
-    display: block;
-    margin: 3px 0;
-    width: 100%;
-
-    &:first-child {
-      padding-top: 35px;
-    }
-
-    a {
-      display: block;
-      padding-left: 0;
-      padding-right: 0;
-      width: 100%;
-    }
-  }
-
   .page-content {
     padding-bottom: 30px;
     padding-top: 30px;
@@ -667,19 +681,6 @@ footer nav {
       // Assume this contains a heading above another set of columns, which doesn't need padding.
       padding-bottom: 0;
     }
-  }
-
-  nav ul li {
-    padding: 8px 0;
-  }
-
-  nav a {
-    font-size: 14px;
-    padding: 0 10px;
-  }
-
-  nav.header-nav {
-    padding: 10px 0;
   }
 
   .page-base h1 {
