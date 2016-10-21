@@ -197,4 +197,16 @@ function uploads_allow_json( $mimes ) {
 }
 add_filter( 'upload_mimes', 'uploads_allow_json' );
 
+
+/**
+ * Modifies default fields in comments_form() output.
+ **/
+function modified_comment_form_fields( $fields ) {
+	if ( isset( $fields['url'] ) ) {
+		unset( $fields['url'] );
+	}
+	return $fields;
+}
+add_filter( 'comment_form_default_fields', 'modified_comment_form_fields' );
+
 ?>
