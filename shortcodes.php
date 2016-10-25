@@ -371,6 +371,17 @@ function sc_comment_form() {
 	ob_start();
 
 	if ( comments_open() ) {
+		$success_message = isset( $_GET['comment-success'] );
+		if ( $success_message ):
+	?>
+		<!-- BEGIN comment success message -->
+		<div class="comment-notification alert alert-success">
+			<p>Thank you for submitting your message.</p>
+		</div>
+		<!-- END comment success message -->
+	<?php
+		endif;
+
 		comment_form( array(
 			'title_reply' => __( 'Post a Message' ),
 
