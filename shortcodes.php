@@ -390,6 +390,7 @@ function sc_comment_form() {
 }
 add_shortcode('comment-form', 'sc_comment_form');
 
+
 /**
  * Output Upcoming Events via shortcode.
  **/
