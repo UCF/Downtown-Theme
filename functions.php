@@ -197,4 +197,34 @@ function uploads_allow_json( $mimes ) {
 }
 add_filter( 'upload_mimes', 'uploads_allow_json' );
 
+
+/**
+ * Modifies default fields in comments_form() output.
+ **/
+function modified_comment_form_fields( $fields ) {
+	if ( isset( $fields['url'] ) ) {
+		unset( $fields['url'] );
+	}
+	return $fields;
+}
+add_filter( 'comment_form_default_fields', 'modified_comment_form_fields' );
+
+
+/**
+ * Bare-bones logic for appending 'comment-success' GET param to the
+ * comment form's redirect url, instead of linking to the
+ * individual comment's anchor (which won't exist on the page if comment
+ * moderation is enforced.)
+ **/
+function comment_confirmation_message( $location, $comment ) {
+	$location_parts = explode( '#', $location );
+	$location_noanchor = $location_parts[0];
+	$location = strpos( $location_noanchor, '?' ) !== false ? $location_noanchor . '&comment-success' : $location_noanchor . '?comment-success';
+
+	return $location;
+}
+
+add_filter( 'comment_post_redirect', 'comment_confirmation_message' );
+
+
 ?>
