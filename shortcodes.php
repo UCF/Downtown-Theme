@@ -373,13 +373,13 @@ function sc_comment_form() {
 	if ( comments_open() ) {
 		$success_message = isset( $_GET['comment-success'] );
 		if ( $success_message ):
-		?>
+	?>
 		<!-- BEGIN comment success message -->
 		<div class="comment-notification alert alert-success">
 			<p>Thank you for submitting your message.</p>
 		</div>
 		<!-- END comment success message -->
-		<?php
+	<?php
 		endif;
 
 		comment_form( array(
@@ -400,6 +400,7 @@ function sc_comment_form() {
 	return ob_get_clean();
 }
 add_shortcode('comment-form', 'sc_comment_form');
+
 
 /**
  * Output Upcoming Events via shortcode.

@@ -226,4 +226,5 @@ function comment_confirmation_message( $location, $comment ) {
 
 add_filter( 'comment_post_redirect', 'comment_confirmation_message' );
 
+
 ?>
