@@ -254,6 +254,10 @@ add_shortcode('blockquote', 'sc_blockquote');
  * full-screen background image with parallax effects.
  **/
 function sc_parallax_feature($attrs, $content=null) {
+	$attrs = shortcode_atts( array(
+		'title' => ''
+	), $attrs, 'parallax_feature' );
+
 	$title = $attrs['title'];
 	$feature = !empty( $title ) ? get_page_by_title( $title, 'OBJECT', 'parallax_feature' ) : null;
 
