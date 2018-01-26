@@ -358,17 +358,21 @@ function sc_display_recent_updates( $attrs, $content=null ) {
 add_shortcode('display-recent-updates', 'sc_display_recent_updates');
 
 
-function sc_comments($attr, $content=null) {
+function sc_comments( $attr, $content=null ) {
+	$attr = shortcode_atts( array(
+		'title' => ''
+	), $attr, 'comments' );
+
 	ob_start();
-	if ($attr['title']) {
+	if ( !empty( $attr['title'] ) ) {
 	?>
-		<h2 class="border-bottom comments-title"><?php echo $attr['title'] ?></h2>
+		<h2 class="border-bottom comments-title"><?php echo $attr['title']; ?></h2>
 	<?php
 	}
-	comments_template('', true);
+	comments_template( '', true );
 	return ob_get_clean();
 }
-add_shortcode('comments', 'sc_comments');
+add_shortcode( 'comments', 'sc_comments' );
 
 
 function sc_comment_form() {
