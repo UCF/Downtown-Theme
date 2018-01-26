@@ -18,7 +18,7 @@ add_shortcode('search_form', 'sc_search_form');
  * @author Chris Conover
  **/
 function sc_post_type_search($params=array(), $content='') {
-	$defaults = array(
+	$params = shortcode_atts( array(
 		'post_type_name'         => 'post',
 		'taxonomy'               => 'category',
 		'show_empty_sections'    => false,
@@ -30,9 +30,7 @@ function sc_post_type_search($params=array(), $content='') {
 		'show_sorting'           => True,
 		'default_sorting'        => 'term',
 		'show_sorting'           => True
-	);
-
-	$params = ($params === '') ? $defaults : array_merge($defaults, $params);
+	), $params, 'post-type-search' );
 
 	$params['show_empty_sections'] = (bool)$params['show_empty_sections'];
 	$params['column_count']        = is_numeric($params['column_count']) ? (int)$params['column_count'] : $defaults['column_count'];
@@ -208,9 +206,9 @@ add_shortcode('post-type-search', 'sc_post_type_search');
 * Wrap arbitrary text in <blockquote>
 **/
 function sc_blockquote($attr, $content='') {
-	$source = $attr['source'] ? $attr['source'] : null;
-	$cite = $attr['cite'] ? $attr['cite'] : null;
-	$color = $attr['color'] ? $attr['color'] : null;
+	$source = isset( $attr['source'] ) ? $attr['source'] : null;
+	$cite   = isset( $attr['cite'] ) ? $attr['cite'] : null;
+	$color  = isset( $attr['color'] ) ? $attr['color'] : null;
 
 	$html = '<blockquote';
 	if ($source) {
@@ -451,10 +449,10 @@ add_shortcode( 'social-share-buttons', 'sc_social_share_buttons' );
 
 
 function sc_chart( $attr ) {
-	$id = $attr['id'] ? $attr['id'] : 'custom-chart';
-	$type = $attr['type'] ? $attr['type'] : 'bar';
-	$json = $attr['data'] ? $attr['data'] : '';
-	$options = $attr['options'] ? $attr['options'] : '';
+	$id = isset( $attr['id'] ) ? $attr['id'] : 'custom-chart';
+	$type = isset( $attr['type'] ) ? $attr['type'] : 'bar';
+	$json = isset( $attr['data'] ) ? $attr['data'] : '';
+	$options = isset( $attr['options'] ) ? $attr['options'] : '';
 
 	if ( empty( $json ) ) {
 		return;
