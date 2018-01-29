@@ -45,7 +45,7 @@ abstract class CustomTaxonomy {
 
 	public function options($key){
 		$vars = get_object_vars($this);
-		return $vars[$key];
+		return isset( $vars[$key] ) ? $vars[$key] : null;
 	}
 
 	public function labels() {

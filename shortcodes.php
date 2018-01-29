@@ -18,7 +18,7 @@ add_shortcode('search_form', 'sc_search_form');
  * @author Chris Conover
  **/
 function sc_post_type_search($params=array(), $content='') {
-	$defaults = array(
+	$params = shortcode_atts( array(
 		'post_type_name'         => 'post',
 		'taxonomy'               => 'category',
 		'show_empty_sections'    => false,
@@ -30,9 +30,7 @@ function sc_post_type_search($params=array(), $content='') {
 		'show_sorting'           => True,
 		'default_sorting'        => 'term',
 		'show_sorting'           => True
-	);
-
-	$params = ($params === '') ? $defaults : array_merge($defaults, $params);
+	), $params, 'post-type-search' );
 
 	$params['show_empty_sections'] = (bool)$params['show_empty_sections'];
 	$params['column_count']        = is_numeric($params['column_count']) ? (int)$params['column_count'] : $defaults['column_count'];
@@ -208,9 +206,9 @@ add_shortcode('post-type-search', 'sc_post_type_search');
 * Wrap arbitrary text in <blockquote>
 **/
 function sc_blockquote($attr, $content='') {
-	$source = $attr['source'] ? $attr['source'] : null;
-	$cite = $attr['cite'] ? $attr['cite'] : null;
-	$color = $attr['color'] ? $attr['color'] : null;
+	$source = isset( $attr['source'] ) ? $attr['source'] : null;
+	$cite   = isset( $attr['cite'] ) ? $attr['cite'] : null;
+	$color  = isset( $attr['color'] ) ? $attr['color'] : null;
 
 	$html = '<blockquote';
 	if ($source) {
@@ -254,6 +252,10 @@ add_shortcode('blockquote', 'sc_blockquote');
  * full-screen background image with parallax effects.
  **/
 function sc_parallax_feature($attrs, $content=null) {
+	$attrs = shortcode_atts( array(
+		'title' => ''
+	), $attrs, 'parallax_feature' );
+
 	$title = $attrs['title'];
 	$feature = !empty( $title ) ? get_page_by_title( $title, 'OBJECT', 'parallax_feature' ) : null;
 
@@ -354,17 +356,21 @@ function sc_display_recent_updates( $attrs, $content=null ) {
 add_shortcode('display-recent-updates', 'sc_display_recent_updates');
 
 
-function sc_comments($attr, $content=null) {
+function sc_comments( $attr, $content=null ) {
+	$attr = shortcode_atts( array(
+		'title' => ''
+	), $attr, 'comments' );
+
 	ob_start();
-	if ($attr['title']) {
+	if ( !empty( $attr['title'] ) ) {
 	?>
-		<h2 class="border-bottom comments-title"><?php echo $attr['title'] ?></h2>
+		<h2 class="border-bottom comments-title"><?php echo $attr['title']; ?></h2>
 	<?php
 	}
-	comments_template('', true);
+	comments_template( '', true );
 	return ob_get_clean();
 }
-add_shortcode('comments', 'sc_comments');
+add_shortcode( 'comments', 'sc_comments' );
 
 
 function sc_comment_form() {
@@ -443,10 +449,10 @@ add_shortcode( 'social-share-buttons', 'sc_social_share_buttons' );
 
 
 function sc_chart( $attr ) {
-	$id = $attr['id'] ? $attr['id'] : 'custom-chart';
-	$type = $attr['type'] ? $attr['type'] : 'bar';
-	$json = $attr['data'] ? $attr['data'] : '';
-	$options = $attr['options'] ? $attr['options'] : '';
+	$id = isset( $attr['id'] ) ? $attr['id'] : 'custom-chart';
+	$type = isset( $attr['type'] ) ? $attr['type'] : 'bar';
+	$json = isset( $attr['data'] ) ? $attr['data'] : '';
+	$options = isset( $attr['options'] ) ? $attr['options'] : '';
 
 	if ( empty( $json ) ) {
 		return;
