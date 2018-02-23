@@ -1,9 +1,0 @@
-// Variable overrides
-@import 'variables';
-
-// Combine vendor assets and our theme:
-// Override since the SCSS imports are not correct for Bootstrap 2
-@import 'bootstrap2';
-
-// Base imports
-@import 'base';
