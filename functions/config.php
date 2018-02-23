@@ -273,7 +273,7 @@ Config::$links = array(
 
 
 Config::$styles = array(
-	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
+	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.min.css',),
 	plugins_url( 'gravityforms/css/forms.css' ),
 	array('name' => 'theme-styles', 'src' => THEME_CSS_URL.'/style.min.css',),
 );
@@ -284,7 +284,7 @@ if (!empty($theme_options['cloud_font_key'])) {
 }
 
 Config::$scripts = array(
-	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
+	array('admin' => True, 'src' => THEME_JS_URL.'/admin.min.js',),
 	array('name' => 'ucfhb-script', 'src' => '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1',),
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.min.js',),
 );

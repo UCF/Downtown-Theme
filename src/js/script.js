@@ -1,13 +1,13 @@
-// @codekit-prepend "../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js";
-// @codekit-prepend "../bower_components/FitText.js/jquery.fittext.js";
-// @codekit-prepend "../bower_components/stellar/src/jquery.stellar.js";
-// @codekit-prepend "../bower_components/Chart.js/Chart.min.js";
-// @codekit-prepend "webcom-base.js";
-// @codekit-prepend "generic-base.js";
+// =require ./bootstrap-sass/index.js
+// =require ./fittext/jquery.fittext.js
+// =require ./stellar/src/jquery.stellar.js
+// =require ./chart.js/Chart.js
+// =require webcom-base.js
 
-var Generic = {};
 
-Generic.removeExtraGformStyles = function($) {
+const Generic = {};
+
+Generic.removeExtraGformStyles = function ($) {
   // Since we're re-registering the Gravity Form stylesheet
   // manually and we can't dequeue the stylesheet GF adds
   // by default, we're removing the reference to the script if
@@ -15,9 +15,9 @@ Generic.removeExtraGformStyles = function($) {
   $('link#gforms_css-css').remove();
 };
 
-Generic.PostTypeSearch = function($) {
+Generic.PostTypeSearch = function ($) {
   $('.post-type-search')
-    .each(function(post_type_search_index, post_type_search) {
+    .each((post_type_search_index, post_type_search) => {
       var post_type_search = $(post_type_search),
         form             = post_type_search.find('.post-type-search-form'),
         field            = form.find('input[type="text"]'),
@@ -42,7 +42,7 @@ Generic.PostTypeSearch = function($) {
 
       // Get the post data for this search
       post_type_search_data = PostTypeSearchDataManager.searches[post_type_search_index];
-      if(typeof post_type_search_data === 'undefined') { // Search data missing
+      if (typeof post_type_search_data === 'undefined') { // Search data missing
         return false;
       }
 
@@ -50,20 +50,20 @@ Generic.PostTypeSearch = function($) {
       column_count    = post_type_search_data.column_count;
       column_width    = post_type_search_data.column_width;
 
-      if(column_count === 0 || column_width === '') { // Invalid dimensions
+      if (column_count === 0 || column_width === '') { // Invalid dimensions
         return false;
       }
 
       // Sorting toggle
-      sorting_by_term.click(function() {
-        by_alpha.fadeOut('fast', function() {
+      sorting_by_term.click(() => {
+        by_alpha.fadeOut('fast', () => {
           by_term.fadeIn();
           sorting_by_alpha.removeClass('active');
           sorting_by_term.addClass('active');
         });
       });
-      sorting_by_alpha.click(function() {
-        by_term.fadeOut('fast', function() {
+      sorting_by_alpha.click(() => {
+        by_term.fadeOut('fast', () => {
           by_alpha.fadeIn();
           sorting_by_term.removeClass('active');
           sorting_by_alpha.addClass('active');
@@ -72,89 +72,91 @@ Generic.PostTypeSearch = function($) {
 
       // Search form
       form
-        .submit(function(event) {
+        .submit((event) => {
           // Don't allow the form to be submitted
           event.preventDefault();
           perform_search(field.val());
         });
       field
-        .keyup(function() {
+        .keyup(() => {
           // Use a timer to determine when the user is done typing
-          if(typing_timer !== null) {
+          if (typing_timer !== null) {
             clearTimeout(typing_timer);
           }
-          typing_timer = setTimeout(function() {form.trigger('submit');}, typing_delay);
+          typing_timer = setTimeout(() => {
+            form.trigger('submit');
+          }, typing_delay);
         });
 
       function display_search_message(message) {
         results.empty();
-        results.append($('<p class="post-type-search-message"><big>' + message + '</big></p>'));
+        results.append($(`<p class="post-type-search-message"><big>${message}</big></p>`));
         results.show();
       }
 
       function perform_search(search_term) {
-        var matches             = [],
-            elements            = [],
-            elements_per_column = null,
-            columns             = [],
-            post_id_sum         = 0;
+        let matches             = [],
+          elements            = [],
+          elements_per_column = null,
+          columns             = [],
+          post_id_sum         = 0;
 
-        if(search_term.length < MINIMUM_SEARCH_MATCH_LENGTH) {
+        if (search_term.length < MINIMUM_SEARCH_MATCH_LENGTH) {
           results.empty();
           results.hide();
           return;
         }
         // Find the search matches
-        $.each(search_data_set, function(post_id, search_data) {
-          $.each(search_data, function(search_data_index, term) {
-            if(term.toLowerCase().indexOf(search_term.toLowerCase()) != -1) {
+        $.each(search_data_set, (post_id, search_data) => {
+          $.each(search_data, (search_data_index, term) => {
+            if (term.toLowerCase().indexOf(search_term.toLowerCase()) != -1) {
               matches.push(post_id);
               return false;
             }
           });
         });
-        if(matches.length == 0) {
+        if (matches.length == 0) {
           display_search_message('No results were found.');
         } else {
 
           // Copy the associated elements
-          $.each(matches, function(match_index, post_id) {
+          $.each(matches, (match_index, post_id) => {
 
-            var element     = by_alpha.find('li[data-post-id="' + post_id + '"]:eq(0)'),
-                post_id_int = parseInt(post_id, 10);
+            let element     = by_alpha.find(`li[data-post-id="${post_id}"]:eq(0)`),
+              post_id_int = parseInt(post_id, 10);
             post_id_sum += post_id_int;
-            if(element.length == 1) {
+            if (element.length == 1) {
               elements.push(element.clone());
             }
           });
 
-          if(elements.length == 0) {
+          if (elements.length == 0) {
             display_search_message('No results were found.');
           } else {
 
             // Are the results the same as last time?
-            if(post_id_sum != prev_post_id_sum) {
+            if (post_id_sum != prev_post_id_sum) {
               results.empty();
               prev_post_id_sum = post_id_sum;
 
 
               // Slice the elements into their respective columns
               elements_per_column = Math.ceil(elements.length / column_count);
-              for(var i = 0; i < column_count; i++) {
-                var start = i * elements_per_column,
+              for (let i = 0; i < column_count; i++) {
+                let start = i * elements_per_column,
                   end   = start + elements_per_column;
-                if(elements.length > start) {
+                if (elements.length > start) {
                   columns[i] = elements.slice(start, end);
                 }
               }
 
               // Setup results HTML
               results.append($('<div class="row"></div>'));
-              $.each(columns, function(column_index, column_elements) {
-                var column_wrap = $('<div class="' + column_width + '"><ul></ul></div>'),
+              $.each(columns, (column_index, column_elements) => {
+                let column_wrap = $(`<div class="${column_width}"><ul></ul></div>`),
                   column_list = column_wrap.find('ul');
 
-                $.each(column_elements, function(element_index, element) {
+                $.each(column_elements, (element_index, element) => {
                   column_list.append($(element));
                 });
                 results.find('div[class="row"]').append(column_wrap);
@@ -165,36 +167,39 @@ Generic.PostTypeSearch = function($) {
         }
       }
     });
-}
+};
 
 
 /* Assign browser-specific body classes on page load */
-var addBodyClasses = function($) {
-  var bodyClass = '';
+const addBodyClasses = function ($) {
+  let bodyClass = '';
   // Old IE:
-  if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { //test for MSIE x.x;
-    var ieversion = new Number(RegExp.$1) // capture x.x portion and store as a number
-    if (ieversion >= 9) { bodyClass = 'ie ie9'; }
-    else if (ieversion >= 8) { bodyClass = 'ie ie8'; }
+  if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { // test for MSIE x.x;
+    const ieversion = new Number(RegExp.$1); // capture x.x portion and store as a number
+    if (ieversion >= 9) {
+      bodyClass = 'ie ie9';
+    } else if (ieversion >= 8) {
+      bodyClass = 'ie ie8';
+    }
   }
 
   $('body').addClass(bodyClass);
-}
+};
 
 
-var parallaxPhotos = function($) {
-  var isTabletSize = function() {
+const parallaxPhotos = function ($) {
+  const isTabletSize = function () {
     if ($(window).width() <= 768) {
       return true;
     }
     return false;
-  }
+  };
   /* Detect touch-enabled browsers.  (Modernizr check) */
   function isTouchDevice() {
-      return ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
+    return 'ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch;
   }
 
-  var toggleStellar = function() {
+  const toggleStellar = function () {
     if (isTabletSize() || isTouchDevice()) {
       if ($(window).data('plugin_stellar')) {
         $(window).data('plugin_stellar').destroy();
@@ -202,59 +207,63 @@ var parallaxPhotos = function($) {
       $('.parallax-photo')
         .css({
           'background-position': '50% -50px',
-          'background-attachment': 'scroll',
+          'background-attachment': 'scroll'
         });
-    }
-    else {
+    } else {
       $(window).stellar({
         horizontalScrolling: false,
         responsive: true,
         parallaxElements: false
       });
     }
-  }
+  };
 
   toggleStellar();
-  $(window).resize(function() {
+  $(window).resize(() => {
     toggleStellar();
   });
-}
+};
 
 
 /* Fit subpage title text within the heading's set width */
-var subpageTitleSize = function($) {
-  var h1 = $('.parallax-header h1');
+const subpageTitleSize = function ($) {
+  const h1 = $('.parallax-header h1');
   if ($('body').hasClass('ie8')) {
-    h1.fitText(0.75, { minFontSize: '20px', maxFontSize: '120px' });
+    h1.fitText(0.75, {
+      minFontSize: '20px',
+      maxFontSize: '120px'
+    });
+  } else {
+    h1.fitText(0.7, {
+      minFontSize: '20px',
+      maxFontSize: '120px'
+    });
   }
-  else {
-    h1.fitText(0.7, { minFontSize: '20px', maxFontSize: '120px' });
-  }
-}
+};
 
 
 /* Add Bootstrap button styles for GravityForm submit buttons */
-var styleGformButtons = function($) {
+const styleGformButtons = function ($) {
   $('.gform_button').addClass('btn');
-  $(document).bind('gform_post_render', function(){
+  $(document).bind('gform_post_render', () => {
     // Handle buttons generated with ajax
-      $('.gform_button').addClass('btn');
+    $('.gform_button').addClass('btn');
   });
-}
+};
 
 
 /* Toggle mobile nav */
-var mobileNavToggle = function($) {
+const mobileNavToggle = function ($) {
   $('nav.header-nav .mobile-nav-toggle')
-    .on('click', function() {
+    .on('click', function () {
       $(this).parents('.header-nav').toggleClass('mobile-active');
     });
-}
+};
 
 
-var socialButtonTracking = function($) {
-  $('.social a').click(function() {
-    var link = $(this),
+const socialButtonTracking = function ($) {
+  $('.social a').click(function () {
+    let link = $(this),
       target = link.attr('data-button-target'),
       network = '',
       socialAction = '';
@@ -262,20 +271,16 @@ var socialButtonTracking = function($) {
     if (link.hasClass('share-facebook')) {
       network = 'Facebook';
       socialAction = 'Like';
-    }
-    else if (link.hasClass('share-twitter')) {
+    } else if (link.hasClass('share-twitter')) {
       network = 'Twitter';
       socialAction = 'Tweet';
-    }
-    else if (link.hasClass('share-googleplus')) {
+    } else if (link.hasClass('share-googleplus')) {
       network = 'Google+';
       socialAction = 'Share';
-    }
-    else if (link.hasClass('share-linkedin')) {
+    } else if (link.hasClass('share-linkedin')) {
       network = 'Linkedin';
       socialAction = 'Share';
-    }
-    else if (link.hasClass('share-email')) {
+    } else if (link.hasClass('share-email')) {
       network = 'Email';
       socialAction = 'Share';
     }
@@ -287,36 +292,36 @@ var socialButtonTracking = function($) {
 };
 
 
-var customChart = function($) {
-  var $charts = $('.custom-chart');
+const customChart = function ($) {
+  const $charts = $('.custom-chart');
   if ($charts.length) {
-    $.each($charts, function() {
-      var $chart = $(this);
+    $.each($charts, function () {
+      const $chart = $(this);
       // Update id of chart if it is set to default.
       if ($chart.attr('id') === 'custom-chart') {
-        $chart.attr('id', 'custom-chart-' + idx);
+        $chart.attr('id', `custom-chart-${idx}`);
       }
-      var type = $(this).attr('data-chart-type'),
-          jsonPath = $(this).attr('data-chart-data'),
-          optionsPath = $(this).attr('data-chart-options'),
-          canvas = document.createElement('canvas'),
-          ctx = canvas.getContext('2d'),
-          data = {};
+      let type = $(this).attr('data-chart-type'),
+        jsonPath = $(this).attr('data-chart-data'),
+        optionsPath = $(this).attr('data-chart-options'),
+        canvas = document.createElement('canvas'),
+        ctx = canvas.getContext('2d'),
+        data = {};
 
       // Set default options
-      var options = {
+      const options = {
         responsive: true,
         scaleShowGridLines: false,
         pointHitDetectionRadius: 5
       };
 
       $chart.append(canvas);
-      $.getJSON(jsonPath, function(json) {
+      $.getJSON(jsonPath, (json) => {
         data = json;
-        $.getJSON(optionsPath, function(json) {
+        $.getJSON(optionsPath, (json) => {
           $.extend(options, options, json);
-        }).complete(function() {
-          switch(type.toLowerCase()) {
+        }).complete(() => {
+          switch (type.toLowerCase()) {
             case 'bar':
               var barChart = new Chart(ctx).Bar(data, options);
               break;
@@ -340,16 +345,16 @@ var customChart = function($) {
           }
         });
       })
-      .fail(function(e) {
-        console.log(e);
-      });
+        .fail((e) => {
+          console.log(e);
+        });
     });
   }
 };
 
 
-if (typeof jQuery != 'undefined'){
-  jQuery(document).ready(function($) {
+if (typeof jQuery !== 'undefined') {
+  jQuery(document).ready(($) => {
     Webcom.analytics($);
     Webcom.handleExternalLinks($);
     Webcom.loadMoreSearchResults($);
@@ -365,4 +370,6 @@ if (typeof jQuery != 'undefined'){
     mobileNavToggle($);
     customChart($);
   });
-}else{console.log('jQuery dependancy failed to load');}
+} else {
+  console.log('jQuery dependancy failed to load');
+}

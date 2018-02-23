@@ -22,9 +22,13 @@ CVS
 .DS_Store
 Thumbs.db
 
-# Bower
+# Package managers
 static/bower_components/*
+node_modules/*
 
 # Sass stuff
 static/scss/.sass-cache/*
 dev/.sass-cache/*
+
+# Local config
+gulp-config.json
