@@ -226,5 +226,49 @@ function comment_confirmation_message( $location, $comment ) {
 
 add_filter( 'comment_post_redirect', 'comment_confirmation_message' );
 
+if ( ! function_exists( 'format_caption_shortcode' ) ) {
+	/**
+	 * Overrides the caption shortcode
+	 * @param string $output The passed in output
+	 * @param array $attr The attribute array
+	 * @param string $content The content string passed in the shortcode
+	 * @return string The html output
+	 */
+	function format_caption_shortcode( $output, $attr, $content ) {
+		$atts = shortcode_atts( array(
+			'id'	  => '',
+			'align'	  => '',
+			'caption' => '',
+			'class'   => '',
+		), $attr, 'caption' );
+
+		if ( ! empty( $atts['id'] ) ) {
+			$atts['id'] = 'id="' . esc_attr( sanitize_html_class( $atts['id'] ) ) . '" ';
+		}
+
+		$align = $atts['align'] ?: '';
+		$class = trim( 'figure ' . $align . ' ' . $atts['class'] );
+		$html5 = current_theme_supports( 'html5' );
+
+		// Add 'figure-img' class to inner <img>
+		if ( preg_match( '/<img [^>]+>/', $content, $matches ) !== false ) {
+			if ( strpos( $matches[0], 'figure-img' ) === false ) {
+				$image_filtered = str_replace( "class='", "class='figure-img ", str_replace( 'class="', 'class="figure-img ', $matches[0] ) );
+				$content = str_replace( $matches[0], $image_filtered, $content );
+			}
+		}
+		if ( $html5 ) {
+			$html = '<figure ' . $atts['id'] . 'class="' . esc_attr( $class ) . '">'
+			. do_shortcode( $content ) . '<figcaption class="figure-caption">' . $atts['caption'] . '</figcaption></figure>';
+		} else {
+			$html = '<div ' . $atts['id'] . 'class="' . esc_attr( $class ) . '">'
+			. do_shortcode( $content ) . '<p class="figure-caption">' . $atts['caption'] . '</p></div>';
+		}
+
+		return $html;
+	}
+
+	add_filter( 'img_caption_shortcode', 'format_caption_shortcode', 10, 3 );
+}
 
 ?>
