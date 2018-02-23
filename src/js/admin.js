@@ -1,65 +1,81 @@
 // Adds filter method to array objects
 // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/filter
-if(!Array.prototype.filter){
-  Array.prototype.filter=function(a){"use strict";if(this===void 0||this===null)throw new TypeError;var b=Object(this);var c=b.length>>>0;if(typeof a!=="function")throw new TypeError;var d=[];var e=arguments[1];for(var f=0;f<c;f++){if(f in b){var g=b[f];if(a.call(e,g,f,b))d.push(g)}}return d}
+if (!Array.prototype.filter) {
+  Array.prototype.filter = function (a) {
+
+
+    if (this === void 0 || this === null) {
+      throw new TypeError();
+    } const b = Object(this); const c = b.length >>> 0; if (typeof a !== 'function') {
+      throw new TypeError();
+    } const d = []; const e = arguments[1]; for (let f = 0; f < c; f++) {
+      if (f in b) {
+        const g = b[f]; if (a.call(e, g, f, b)) {
+          d.push(g);
+        }
+      }
+    } return d;
+  };
 }
 
-var WebcomAdmin = {};
+const WebcomAdmin = {};
 
 
-WebcomAdmin.__init__ = function($){
+WebcomAdmin.__init__ = function ($) {
   // Allows forms with input fields of type file to upload files
-  $('input[type="file"]').parents('form').attr('enctype','multipart/form-data');
-  $('input[type="file"]').parents('form').attr('encoding','multipart/form-data');
+  $('input[type="file"]').parents('form').attr('enctype', 'multipart/form-data');
+  $('input[type="file"]').parents('form').attr('encoding', 'multipart/form-data');
 };
 
 
-WebcomAdmin.shortcodeTool = function($){
+WebcomAdmin.shortcodeTool = function ($) {
   cls         = this;
   cls.metabox = $('#shortcodes-metabox');
-  if (cls.metabox.length < 1){console.log('no meta'); return;}
+  if (cls.metabox.length < 1) {
+    console.log('no meta'); return;
+  }
 
   cls.form     = cls.metabox.find('form');
   cls.search   = cls.metabox.find('#shortcode-search');
   cls.button   = cls.metabox.find('button');
   cls.results  = cls.metabox.find('#shortcode-results');
   cls.select   = cls.metabox.find('#shortcode-select');
-  cls.form_url = cls.metabox.find("#shortcode-form").val();
-  cls.text_url = cls.metabox.find("#shortcode-text").val();
+  cls.form_url = cls.metabox.find('#shortcode-form').val();
+  cls.text_url = cls.metabox.find('#shortcode-text').val();
 
-  cls.shortcodes = (function(){
-    var shortcodes = new Array();
-    cls.select.children('.shortcode').each(function(){
+  cls.shortcodes = (function () {
+    const shortcodes = new Array();
+    cls.select.children('.shortcode').each(function () {
       shortcodes.push($(this).val());
     });
     return shortcodes;
-  })();
+  }());
 
-  cls.shortcodeAction = function(shortcode){
-    var text = "[" + shortcode + "]"
+  cls.shortcodeAction = function (shortcode) {
+    const text = `[${shortcode}]`;
     send_to_editor(text);
   };
 
-  cls.searchAction = function(){
+  cls.searchAction = function () {
     cls.results.children().remove();
 
-    var value = cls.search.val();
+    const value = cls.search.val();
 
-    if (value.length < 1){
+    if (value.length < 1) {
       return;
     }
 
-    var found = cls.shortcodes.filter(function(e, i, a){
+    const found = cls.shortcodes.filter((e, i, a) => {
       return e.match(value);
     });
 
-    if (found.length > 1){
+    if (found.length > 1) {
       cls.results.removeClass('empty');
     }
 
-    $(found).each(function(){
-      var item      = $("<li />");
-      var link      = $("<a />");
+    $(found).each(function () {
+      const item      = $('<li />');
+      const link      = $('<a />');
       link.attr('href', '#');
       link.addClass('shortcode');
       link.text(this.valueOf());
@@ -68,40 +84,42 @@ WebcomAdmin.shortcodeTool = function($){
     });
 
 
-    if (found.length > 1){
+    if (found.length > 1) {
       cls.results.removeClass('empty');
-    }else{
+    } else {
       cls.results.addClass('empty');
     }
 
   };
 
-  cls.buttonAction = function(){
+  cls.buttonAction = function () {
     cls.searchAction();
   };
 
-  cls.itemAction = function(){
-    var shortcode = $(this).text();
+  cls.itemAction = function () {
+    const shortcode = $(this).text();
     cls.shortcodeAction(shortcode);
     return false;
   };
 
-  cls.selectAction = function(){
-    var selected = $(this).find(".shortcode:selected");
-    if (selected.length < 1){return;}
+  cls.selectAction = function () {
+    const selected = $(this).find('.shortcode:selected');
+    if (selected.length < 1) {
+      return;
+    }
 
-    var value = selected.val();
+    const value = selected.val();
     cls.shortcodeAction(value);
   };
 
-  //Resize results list to match size of input
+  // Resize results list to match size of input
   cls.results.width(cls.search.outerWidth());
 
   // Disable enter key causing form submit on shortcode search field
-  cls.search.keyup(function(e){
+  cls.search.keyup((e) => {
     cls.searchAction();
 
-    if (e.keyCode == 13){
+    if (e.keyCode == 13) {
       return false;
     }
   });
@@ -117,17 +135,17 @@ WebcomAdmin.shortcodeTool = function($){
 };
 
 
-WebcomAdmin.themeOptions = function($){
+WebcomAdmin.themeOptions = function ($) {
   cls          = this;
   cls.active   = null;
   cls.parent   = $('.i-am-a-fancy-admin');
   cls.sections = $('.i-am-a-fancy-admin .fields .section');
   cls.buttons  = $('.i-am-a-fancy-admin .sections .section a');
 
-  this.showSection = function(e){
-    var button  = $(this);
-    var href    = button.attr('href');
-    var section = $(href);
+  this.showSection = function (e) {
+    const button  = $(this);
+    const href    = button.attr('href');
+    const section = $(href);
 
     // Switch active styles
     cls.buttons.removeClass('active');
@@ -137,36 +155,36 @@ WebcomAdmin.themeOptions = function($){
     cls.active = section;
     cls.active.show();
 
-    history.pushState({}, "", button.attr('href'));
-    var http_referrer = cls.parent.find('input[name="_wp_http_referer"]');
+    history.pushState({}, '', button.attr('href'));
+    const http_referrer = cls.parent.find('input[name="_wp_http_referer"]');
     http_referrer.val(window.location);
     return false;
-  }
+  };
 
-  this.__init__ = function(){
+  this.__init__ = function () {
     cls.active = cls.sections.first();
     cls.sections.not(cls.active).hide();
     cls.buttons.first().addClass('active');
     cls.buttons.click(this.showSection);
 
-    if (window.location.hash){
-      cls.buttons.filter('[href="' + window.location.hash + '"]').click();
+    if (window.location.hash) {
+      cls.buttons.filter(`[href="${window.location.hash}"]`).click();
     }
 
-    var fadeTimer = setInterval(function(){
+    var fadeTimer = setInterval(() => {
       $('.updated').fadeOut(1000);
       clearInterval(fadeTimer);
     }, 2000);
   };
 
-  if (cls.parent.length > 0){
+  if (cls.parent.length > 0) {
     cls.__init__();
   }
 };
 
 
-(function($){
+(function ($) {
   WebcomAdmin.__init__($);
   WebcomAdmin.themeOptions($);
   WebcomAdmin.shortcodeTool($);
-})(jQuery);
+}(jQuery));
