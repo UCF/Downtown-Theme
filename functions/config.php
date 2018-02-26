@@ -9,7 +9,8 @@
  * @author Jared Lang
  **/
 function __init__(){
-	add_theme_support('menus');
+	add_theme_support( 'menus' );
+	add_theme_support( 'html5' );
 	add_theme_support('post-thumbnails');
 	add_image_size('parallax_feature-full', 2000, 1200, true);
 	add_image_size('parallax_feature-desktop', 1199, 925, true);
