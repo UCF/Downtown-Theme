@@ -6,11 +6,6 @@
   float: right;
 }
 
-a img {
-  display: block;
-  text-align: center;
-}
-
 img,
 .figure {
   margin-top: .35em;
@@ -33,13 +28,17 @@ img,
     &.aligncenter {
       float: none;
       margin: 1em auto;
-      width: 100%;
     }
   }
 }
 
 .figure {
   display: table;
+
+  a {
+    display: block;
+    text-align: center;
+  }
 
   .figure-caption {
     caption-side: bottom;
