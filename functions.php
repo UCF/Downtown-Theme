@@ -227,4 +227,229 @@ function comment_confirmation_message( $location, $comment ) {
 add_filter( 'comment_post_redirect', 'comment_confirmation_message' );
 
 
+/**
+ * Displays a list of attachments as a Bootstrap slideshow.
+ *
+ * @since v1.1.0
+ * @author Jo Dickson
+ * @param string $gallery_id A unique identifier for the gallery (to use as the id attribute on the gallery's parent element)
+ * @param array $attachments Array of attachment post objects
+ * @param array $attr Array of [gallery] shortcode attributes
+ * @return string
+ */
+function display_gallery_slideshow( $gallery_id, $attachments, $attr ) {
+	if ( empty( $attachments ) || empty( $attr ) ) { return; }
+
+	ob_start();
 ?>
+	<div class="gallery gallery-slideshow carousel slide" id="<?php echo $gallery_id; ?>" data-interval="false">
+		<ol class="carousel-indicators">
+			<?php
+			$indicatorcount = 0;
+
+			foreach ( $attachments as $attachment ):
+				$css_class = '';
+				if ( $indicatorcount == 0 ) {
+					$css_class = 'active';
+				}
+			?>
+				<li data-target="#<?php echo $gallery_id; ?>" data-slide-to="<?php echo $indicatorcount; ?>" class="<?php echo $css_class; ?>"></li>
+			<?php
+				$indicatorcount++;
+			endforeach;
+			?>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<?php
+			// Begin counting slides to set the first one as the active class
+			$slidecount = 1;
+			foreach ( $attachments as $attachment ):
+				$link_url = trim( get_post_meta( $attachment->ID, '_media_link', true ) );
+				$image    = wp_get_attachment_image( $attachment->ID, $attr['size'] );
+				$excerpt  = wptexturize( trim( $attachment->post_excerpt ) );
+
+				$css_class = 'item';
+				if ( $slidecount == 1 ) {
+					$css_class .= ' active';
+				}
+
+				// Add a link to the image if a link exists.
+			?>
+				<div class="<?php echo $css_class; ?>">
+					<?php echo ( !empty( $link_url ) ? '<a href="' . $link_url . '">' : '' ); ?>
+					<?php echo $image; ?>
+					<?php echo ( !empty( $link_url ) ? '</a>' : '' ); ?>
+
+					<?php if ( $excerpt ): ?>
+					<div class="carousel-caption">
+						<?php echo $excerpt; ?>
+					</div>
+					<?php endif; ?>
+				</div>
+			<?php
+				$slidecount++;
+			endforeach;
+			?>
+		</div>
+		<a class="left carousel-control" href="#<?php echo $gallery_id; ?>" role="button" data-slide="prev">
+			<span class="fa fa-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#<?php echo $gallery_id; ?>" role="button" data-slide="next">
+		    <span class="fa fa-chevron-right" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
+		</a>
+	</div>
+
+<?php
+	return ob_get_clean();
+}
+
+
+/**
+ * Displays a list of attachments as a list of clickable thumbnails.
+ *
+ * @since v1.1.0
+ * @author Jo Dickson
+ * @param string $gallery_id A unique identifier for the gallery (to use as the id attribute on the gallery's parent element)
+ * @param array $attachments Array of attachment post objects
+ * @param array $attr Array of [gallery] shortcode attributes
+ * @return string
+ */
+function display_gallery_thumbnails( $gallery_id, $attachments, $attr ) {
+	if ( empty( $attachments ) || empty( $attr ) ) { return; }
+
+	ob_start();
+?>
+	<div id="<?php echo $gallery_id; ?>" class="gallery gallery-thumbnails">
+		<div class="row">
+
+		<?php
+		$grid_total = 12;
+		$cols = intval( $attr['columns'] );
+		if ( !in_array( $cols, get_gallery_grid_options() ) ) {
+			$cols = 4;  // force a sane default if one isn't provided
+		}
+
+		$span = 'span' . $grid_total / $cols;
+		$count = 0;
+
+		foreach ( $attachments as $attachment ):
+		?>
+			<?php if ( $count % $cols === 0 && $count > 0 ): ?>
+			</div><div class="row">
+			<?php endif; ?>
+
+			<div class="<?php echo $span; ?>">
+				<!-- TODO add necessary attrs to load full-size image within a modal -->
+				<a href="#" class="thumbnail">
+					<?php echo wp_get_attachment_image( $attachment->ID, $attr['size'] ); ?>
+				</a>
+			</div>
+		<?php
+		$count++;
+		endforeach;
+		?>
+
+		</div>
+	</div>
+<?php
+	return ob_get_clean();
+}
+
+
+/**
+ * Returns an array of valid Bootstrap grid .span class values for use in
+ * gallery layouts.
+ *
+ * @since v1.1.0
+ * @author Jo Dickson
+ * @return array
+ */
+function get_gallery_grid_options() {
+	return array( 1, 2, 3, 4, 6 );
+}
+
+
+/**
+ * Replaces gallery settings in the media library modal with our own.
+ * Based on https://wordpress.stackexchange.com/a/209923
+ *
+ * @since v1.1.0
+ * @author Jo Dickson
+ * @return void
+ */
+function custom_gallery_settings() {
+?>
+<script type="text/html" id="tmpl-custom-gallery-settings">
+	<h2><?php _e( 'Gallery Settings' ); ?></h2>
+
+	<label class="setting">
+		<span><?php _e('Layout'); ?></span>
+		<select data-setting="layout">
+			<option value="thumbnail">Thumbnails (default)</option>
+			<option value="slideshow">Slideshow</option>
+		</select>
+	</label>
+
+	<label class="setting">
+		<span><?php _e('Columns'); ?></span>
+		<select class="columns" name="columns" data-setting="columns">
+			<?php
+			$col_options = get_gallery_grid_options();
+			foreach ( $col_options as $i ) :
+			?>
+				<option value="<?php echo esc_attr( $i ); ?>" <#
+					if ( <?php echo $i; ?> == wp.media.galleryDefaults.columns ) { #>selected="selected"<# }
+				#>>
+					<?php echo esc_html( $i ); ?>
+				</option>
+			<?php endforeach; ?>
+		</select>
+	</label>
+
+	<label class="setting size">
+		<span><?php _e( 'Size' ); ?></span>
+		<select class="size" name="size"
+			data-setting="size"
+			<# if ( data.userSettings ) { #>
+				data-user-setting="imgsize"
+			<# } #>
+			>
+			<?php
+			/** This filter is documented in wp-admin/includes/media.php */
+			$size_names = apply_filters( 'image_size_names_choose', array(
+				'full'      => __( 'Full Size' ),
+				'large'     => __( 'Large' ),
+				'medium'    => __( 'Medium' ),
+				'thumbnail' => __( 'Thumbnail' ),
+			) );
+
+			foreach ( $size_names as $size => $label ) : ?>
+				<option value="<?php echo esc_attr( $size ); ?>">
+					<?php echo esc_html( $label ); ?>
+				</option>
+			<?php endforeach; ?>
+		</select>
+	</label>
+</script>
+
+<script type="text/javascript">
+	jQuery( document ).ready( function() {
+		_.extend( wp.media.galleryDefaults, {
+			layout: 'thumbnail',
+			columns: 4,
+			size: 'full'
+		} );
+
+		wp.media.view.Settings.Gallery = wp.media.view.Settings.Gallery.extend( {
+			template: function( view ) {
+				return wp.media.template( 'custom-gallery-settings' )( view );
+			}
+		} );
+	} );
+</script>
+<?php
+}
+
+add_action( 'print_media_templates', 'custom_gallery_settings' );

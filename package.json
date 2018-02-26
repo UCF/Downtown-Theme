@@ -1,6 +1,7 @@
 {
   "private": true,
   "devDependencies": {
+    "font-awesome": "github:FortAwesome/Font-Awesome#v4.7.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.2",
     "babel-plugin-transform-es2015-modules-strip": "^0.1.1",

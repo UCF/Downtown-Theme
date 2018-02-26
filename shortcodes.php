@@ -478,4 +478,120 @@ function sc_chart( $attr ) {
 }
 add_shortcode( 'chart', 'sc_chart' );
 
+
+/**
+ * Overrides WordPress's default [gallery] shortcode output with our own,
+ * which lets the user specify either a thumbnail gallery with expandable
+ * modals and prev/next navs, or a Bootstrap slideshow.
+ *
+ * @since v1.1.0
+ **/
+function sc_gallery_overrides( $html, $attr, $instance ) {
+	global $post;
+
+	// Set and sanitize various $attr's:
+	if ( !empty( $attr['ids'] ) ) {
+		if ( empty( $attr['orderby'] ) ) {
+			$attr['orderby'] = 'post__in';
+		}
+		$attr['include'] = $attr['ids'];
+	}
+
+	if ( isset( $attr['orderby'] ) ) {
+		$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
+		if ( !$attr['orderby'] ) {
+			unset( $attr['orderby'] );
+		}
+	}
+
+	if ( isset( $attr['order'] ) && $attr['order'] === 'RAND' ) {
+		$attr['orderby'] = 'none';
+	}
+
+	// Merge default attrs and user-provided attrs.
+	$attr = shortcode_atts(
+		array(
+			'order'      => 'ASC',
+			'orderby'    => 'menu_order ID',
+			'id'         => $post->ID,
+			'columns'    => 4,
+			'size'       => 'full',
+			'include'    => '',
+			'exclude'    => '',
+			'layout'     => 'thumbnail' // custom attr for our shortcode override
+		),
+		$attr
+	);
+
+	$attachment_args = array(
+		'post_status'    => 'inherit',
+		'post_type'      => 'attachment',
+		'post_mime_type' => 'image',
+		'order'          => $attr['order'],
+		'orderby'        => $attr['orderby']
+	);
+
+	if ( !empty( $attr['include'] ) ) {
+		$attachments = get_posts(
+			array_merge(
+				$attachment_args,
+				array( 'include' => $attr['include'], )
+			)
+		);
+	}
+	elseif ( !empty( $attr['exclude'] ) ) {
+		$attachments = get_children(
+			array_merge(
+				$attachment_args,
+				array(
+					'post_parent' => $attr['id'],
+					'exclude' => $attr['exclude'],
+				)
+			)
+		);
+	}
+	else {
+		$attachments = get_children(
+			array_merge(
+				$attachment_args,
+				array( 'post_parent' => $attr['id'] )
+			)
+		);
+	}
+
+	// Return now if there's no attachments to work with
+	if ( empty( $attachments ) ) {
+		return '';
+	}
+
+	// Return a list of attachment links instead of the provided layout if
+	// the current view is a feed
+	if ( is_feed() ) {
+		$output = '\n';
+		foreach ( $attachments as $attachment ) {
+			$output .= wp_get_attachment_link( $attachment->ID, 'thumbnail', true ) . '\n';
+		}
+		return $output;
+	}
+
+	// Finally, return the gallery markup:
+	$gallery_id = 'gallery-' . $instance;
+	$retval = '';
+
+	switch ( $attr['layout'] ) {
+		case 'slideshow':
+			$retval = display_gallery_slideshow( $gallery_id, $attachments, $attr );
+			break;
+		case 'thumbnail':
+		default:
+			$retval = display_gallery_thumbnails( $gallery_id, $attachments, $attr );
+			break;
+	}
+
+	return $retval;
+}
+
+add_filter( 'post_gallery', 'sc_gallery_overrides', 10, 3 );
+
+
 ?>
