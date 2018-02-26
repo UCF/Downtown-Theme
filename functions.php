@@ -337,11 +337,11 @@ function display_gallery_slideshow( $gallery_id, $attachments, $attr ) {
 			?>
 		</div>
 		<a class="left carousel-control" href="#<?php echo $gallery_id; ?>" role="button" data-slide="prev">
-			<span class="fa fa-chevron-left" aria-hidden="true"></span>
+			<span class="fa fa-arrow-left" aria-hidden="true"></span>
 			<span class="sr-only">Previous</span>
 		</a>
 		<a class="right carousel-control" href="#<?php echo $gallery_id; ?>" role="button" data-slide="next">
-		    <span class="fa fa-chevron-right" aria-hidden="true"></span>
+		    <span class="fa fa-arrow-right" aria-hidden="true"></span>
 		    <span class="sr-only">Next</span>
 		</a>
 	</div>
@@ -380,14 +380,16 @@ function display_gallery_thumbnails( $gallery_id, $attachments, $attr ) {
 		$count = 0;
 
 		foreach ( $attachments as $attachment ):
+			$excerpt = esc_attr( wptexturize( trim( $attachment->post_excerpt ) ) );
+			$img_url_full = wp_get_attachment_image_src( $attachment->ID, 'full' );
+			$img_url_full = $img_url_full ? $img_url_full[0] : '';
 		?>
 			<?php if ( $count % $cols === 0 && $count > 0 ): ?>
 			</div><div class="row">
 			<?php endif; ?>
 
 			<div class="<?php echo $span; ?>">
-				<!-- TODO add necessary attrs to load full-size image within a modal -->
-				<a href="#" class="thumbnail">
+				<a href="<?php echo $img_url_full; ?>" class="thumbnail" data-fancybox="<?php echo $gallery_id; ?>" data-caption="<?php echo $excerpt; ?>">
 					<?php echo wp_get_attachment_image( $attachment->ID, $attr['size'] ); ?>
 				</a>
 			</div>

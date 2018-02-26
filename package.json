@@ -1,7 +1,7 @@
 {
   "private": true,
   "devDependencies": {
-    "font-awesome": "github:FortAwesome/Font-Awesome#v4.7.0",
+    "@fancyapps/fancybox": "^3.2.5",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.2",
     "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
@@ -10,6 +10,7 @@
     "browser-sync": "^2.18.13",
     "chart.js": "~1.0.2",
     "eslint": "^4.12.0",
+    "font-awesome": "github:FortAwesome/Font-Awesome#v4.7.0",
     "gulp": "~3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^7.0.0",
