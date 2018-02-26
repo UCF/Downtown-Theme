@@ -26,7 +26,7 @@
 								<input name="client" type="hidden" value="UCF_Main">
 								<input name="proxystylesheet" type="hidden" value="UCF_Main">
 								<span class="form-inline">
-								<input id="q-404" class="search-field input-xxlarge" name="q" type="text" placeholder="Tell us more about what you're looking for...">
+								<input id="q-404" class="search-field" name="q" type="text" placeholder="Tell us more about what you're looking for...">
 									<button class="search-submit btn">Search</button>
 								</span>
 							</div>
