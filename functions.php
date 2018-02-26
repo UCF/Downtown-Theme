@@ -238,16 +238,18 @@ add_filter( 'comment_post_redirect', 'comment_confirmation_message' );
  * @return string
  */
 function display_gallery_slideshow( $gallery_id, $attachments, $attr ) {
+	if ( empty( $attachments ) || empty( $attr ) ) { return; }
+
 	ob_start();
 ?>
-	<div class="carousel slide" id="<?php echo $gallery_id; ?>">
+	<div class="gallery gallery-slideshow carousel slide" id="<?php echo $gallery_id; ?>" data-interval="false">
 		<ol class="carousel-indicators">
 			<?php
 			$indicatorcount = 0;
 
 			foreach ( $attachments as $attachment ):
 				$css_class = '';
-				if ( $indicatorcount == 1 ) {
+				if ( $indicatorcount == 0 ) {
 					$css_class = 'active';
 				}
 			?>
@@ -259,11 +261,9 @@ function display_gallery_slideshow( $gallery_id, $attachments, $attr ) {
 		</ol>
 		<div class="carousel-inner" role="listbox">
 			<?php
-			$i = 0;
-
 			// Begin counting slides to set the first one as the active class
 			$slidecount = 1;
-			foreach ( $attachments as $id => $attachment ):
+			foreach ( $attachments as $attachment ):
 				$link_url = trim( get_post_meta( $attachment->ID, '_media_link', true ) );
 				$image    = wp_get_attachment_image( $attachment->ID, $attr['size'] );
 				$excerpt  = wptexturize( trim( $attachment->post_excerpt ) );
@@ -292,11 +292,11 @@ function display_gallery_slideshow( $gallery_id, $attachments, $attr ) {
 			?>
 		</div>
 		<a class="left carousel-control" href="#<?php echo $gallery_id; ?>" role="button" data-slide="prev">
-			<span class="icon-left fa fa-chevron-left" aria-hidden="true"></span>
+			<span class="fa fa-chevron-left" aria-hidden="true"></span>
 			<span class="sr-only">Previous</span>
 		</a>
 		<a class="right carousel-control" href="#<?php echo $gallery_id; ?>" role="button" data-slide="next">
-		    <span class="icon-right fa fa-chevron-right" aria-hidden="true"></span>
+		    <span class="fa fa-chevron-right" aria-hidden="true"></span>
 		    <span class="sr-only">Next</span>
 		</a>
 	</div>
@@ -317,11 +317,57 @@ function display_gallery_slideshow( $gallery_id, $attachments, $attr ) {
  * @return string
  */
 function display_gallery_thumbnails( $gallery_id, $attachments, $attr ) {
+	if ( empty( $attachments ) || empty( $attr ) ) { return; }
+
 	ob_start();
 ?>
-TODO
+	<div id="<?php echo $gallery_id; ?>" class="gallery gallery-thumbnails">
+		<div class="row">
+
+		<?php
+		$grid_total = 12;
+		$cols = intval( $attr['columns'] );
+		if ( !in_array( $cols, get_gallery_grid_options() ) ) {
+			$cols = 4;  // force a sane default if one isn't provided
+		}
+
+		$span = 'span' . $grid_total / $cols;
+		$count = 0;
+
+		foreach ( $attachments as $attachment ):
+		?>
+			<?php if ( $count % $cols === 0 && $count > 0 ): ?>
+			</div><div class="row">
+			<?php endif; ?>
+
+			<div class="<?php echo $span; ?>">
+				<!-- TODO add necessary attrs to load full-size image within a modal -->
+				<a href="#" class="thumbnail">
+					<?php echo wp_get_attachment_image( $attachment->ID, $attr['size'] ); ?>
+				</a>
+			</div>
+		<?php
+		$count++;
+		endforeach;
+		?>
+
+		</div>
+	</div>
 <?php
 	return ob_get_clean();
+}
+
+
+/**
+ * Returns an array of valid Bootstrap grid .span class values for use in
+ * gallery layouts.
+ *
+ * @since v1.1.0
+ * @author Jo Dickson
+ * @return array
+ */
+function get_gallery_grid_options() {
+	return array( 1, 2, 3, 4, 6 );
 }
 
 
@@ -329,6 +375,8 @@ TODO
  * Replaces gallery settings in the media library modal with our own.
  * Based on https://wordpress.stackexchange.com/a/209923
  *
+ * @since v1.1.0
+ * @author Jo Dickson
  * @return void
  */
 function custom_gallery_settings() {
@@ -348,7 +396,7 @@ function custom_gallery_settings() {
 		<span><?php _e('Columns'); ?></span>
 		<select class="columns" name="columns" data-setting="columns">
 			<?php
-			$col_options = array( 1, 2, 3, 4, 6 );
+			$col_options = get_gallery_grid_options();
 			foreach ( $col_options as $i ) :
 			?>
 				<option value="<?php echo esc_attr( $i ); ?>" <#
