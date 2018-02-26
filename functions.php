@@ -227,4 +227,99 @@ function comment_confirmation_message( $location, $comment ) {
 add_filter( 'comment_post_redirect', 'comment_confirmation_message' );
 
 
+/**
+ * Displays a list of attachments as a Bootstrap slideshow.
+ *
+ * @since v1.1.0
+ * @author Jo Dickson
+ * @param string $gallery_id A unique identifier for the gallery (to use as the id attribute on the gallery's parent element)
+ * @param array $attachments Array of attachment post objects
+ * @param array $attr Array of [gallery] shortcode attributes
+ * @return string
+ */
+function display_gallery_slideshow( $gallery_id, $attachments, $attr ) {
+	ob_start();
 ?>
+	<div class="carousel slide" id="<?php echo $gallery_id; ?>">
+		<ol class="carousel-indicators">
+			<?php
+			$indicatorcount = 0;
+
+			foreach ( $attachments as $attachment ):
+				$css_class = '';
+				if ( $indicatorcount == 1 ) {
+					$css_class = 'active';
+				}
+			?>
+				<li data-target="#<?php echo $gallery_id; ?>" data-slide-to="<?php echo $indicatorcount; ?>" class="<?php echo $css_class; ?>"></li>
+			<?php
+				$indicatorcount++;
+			endforeach;
+			?>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<?php
+			$i = 0;
+
+			// Begin counting slides to set the first one as the active class
+			$slidecount = 1;
+			foreach ( $attachments as $id => $attachment ):
+				$link_url = trim( get_post_meta( $attachment->ID, '_media_link', true ) );
+				$image    = wp_get_attachment_image( $attachment->ID, $attr['size'] );
+				$excerpt  = wptexturize( trim( $attachment->post_excerpt ) );
+
+				$css_class = 'item';
+				if ( $slidecount == 1 ) {
+					$css_class .= ' active';
+				}
+
+				// Add a link to the image if a link exists.
+			?>
+				<div class="<?php echo $css_class; ?>">
+					<?php echo ( !empty( $link_url ) ? '<a href="' . $link_url . '">' : '' ); ?>
+					<?php echo $image; ?>
+					<?php echo ( !empty( $link_url ) ? '</a>' : '' ); ?>
+
+					<?php if ( $excerpt ): ?>
+					<div class="carousel-caption">
+						<?php echo $excerpt; ?>
+					</div>
+					<?php endif; ?>
+				</div>
+			<?php
+				$slidecount++;
+			endforeach;
+			?>
+		</div>
+		<a class="left carousel-control" href="#<?php echo $gallery_id; ?>" role="button" data-slide="prev">
+			<span class="icon-left fa fa-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#<?php echo $gallery_id; ?>" role="button" data-slide="next">
+		    <span class="icon-right fa fa-chevron-right" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
+		</a>
+	</div>
+
+<?php
+	return ob_get_clean();
+}
+
+
+/**
+ * Displays a list of attachments as a list of clickable thumbnails.
+ *
+ * @since v1.1.0
+ * @author Jo Dickson
+ * @param string $gallery_id A unique identifier for the gallery (to use as the id attribute on the gallery's parent element)
+ * @param array $attachments Array of attachment post objects
+ * @param array $attr Array of [gallery] shortcode attributes
+ * @return string
+ */
+function display_gallery_thumbnails( $gallery_id, $attachments, $attr ) {
+	ob_start();
+?>
+TODO
+<?php
+	return ob_get_clean();
+}
