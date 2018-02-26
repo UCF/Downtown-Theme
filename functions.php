@@ -323,3 +323,85 @@ TODO
 <?php
 	return ob_get_clean();
 }
+
+
+/**
+ * Replaces gallery settings in the media library modal with our own.
+ * Based on https://wordpress.stackexchange.com/a/209923
+ *
+ * @return void
+ */
+function custom_gallery_settings() {
+?>
+<script type="text/html" id="tmpl-custom-gallery-settings">
+	<h2><?php _e( 'Gallery Settings' ); ?></h2>
+
+	<label class="setting">
+		<span><?php _e('Layout'); ?></span>
+		<select data-setting="layout">
+			<option value="thumbnail">Thumbnails (default)</option>
+			<option value="slideshow">Slideshow</option>
+		</select>
+	</label>
+
+	<label class="setting">
+		<span><?php _e('Columns'); ?></span>
+		<select class="columns" name="columns" data-setting="columns">
+			<?php
+			$col_options = array( 1, 2, 3, 4, 6 );
+			foreach ( $col_options as $i ) :
+			?>
+				<option value="<?php echo esc_attr( $i ); ?>" <#
+					if ( <?php echo $i; ?> == wp.media.galleryDefaults.columns ) { #>selected="selected"<# }
+				#>>
+					<?php echo esc_html( $i ); ?>
+				</option>
+			<?php endforeach; ?>
+		</select>
+	</label>
+
+	<label class="setting size">
+		<span><?php _e( 'Size' ); ?></span>
+		<select class="size" name="size"
+			data-setting="size"
+			<# if ( data.userSettings ) { #>
+				data-user-setting="imgsize"
+			<# } #>
+			>
+			<?php
+			/** This filter is documented in wp-admin/includes/media.php */
+			$size_names = apply_filters( 'image_size_names_choose', array(
+				'full'      => __( 'Full Size' ),
+				'large'     => __( 'Large' ),
+				'medium'    => __( 'Medium' ),
+				'thumbnail' => __( 'Thumbnail' ),
+			) );
+
+			foreach ( $size_names as $size => $label ) : ?>
+				<option value="<?php echo esc_attr( $size ); ?>">
+					<?php echo esc_html( $label ); ?>
+				</option>
+			<?php endforeach; ?>
+		</select>
+	</label>
+</script>
+
+<script type="text/javascript">
+	jQuery( document ).ready( function() {
+		_.extend( wp.media.galleryDefaults, {
+			layout: 'thumbnail',
+			columns: 4,
+			size: 'full'
+		} );
+
+		wp.media.view.Settings.Gallery = wp.media.view.Settings.Gallery.extend( {
+			template: function( view ) {
+				return wp.media.template( 'custom-gallery-settings' )( view );
+			}
+		} );
+	} );
+</script>
+<?php
+}
+
+add_action( 'print_media_templates', 'custom_gallery_settings' );
