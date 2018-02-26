@@ -2,29 +2,45 @@
 <?php disallow_direct_load('404.php');?>
 
 <?php get_header(); the_post();?>
-	<div class="row page-content" id="page-not-found">
-		<div class="span9">
-			<article>
-				<h1>Page Not Found</h1>
-				<?php 
-					$page = get_page_by_title('404');
-					if($page){
-						$content = $page->post_content;
-						$content = apply_filters('the_content', $content);
-						$content = str_replace(']]>', ']]>', $content);
-					}
-				?>
-				<?php if($content):?>
-				<?=$content?>
-				<?php else:?>
-				<p>The page you requested doesn't exist.  Sorry about that.</p>
-				<?php endif;?>
-			</article>
-		</div>
-		
-		<div id="sidebar" class="span3">
-			<?=get_sidebar();?>
-		</div>
-	</div>
+<article role="main" id="page-not-found">
+	<main class="container page-content">
+		<?php
+		$page = get_page_by_title( '404' );
+		$content = '';
+		if ( $page && $page->post_status === 'publish' ) {
+			$content = trim( apply_filters( 'the_content', $page->post_content ) );
+		}
+		?>
+		<?php if ( $content ) : ?>
+			<?php echo $content; ?>
+		<?php else: ?>
+			<div class="knightro-bg">
+				<div class="row">
+					<div class="span8">
+						<h1 class="not-found-header">Page Not Found</h1>
+						<p class="lead">Don't give in to despair, your quest continues here...</p>
+						<p>Try double-checking the spelling of the address you requested, or search using the field below:</p>
+						<form class="search-form mb-3" action="https://search.ucf.edu">
+							<div class="input-group">
+								<label class="sr-only" for="q-404">Search UCF</label>
+								<input name="client" type="hidden" value="UCF_Main">
+								<input name="proxystylesheet" type="hidden" value="UCF_Main">
+								<span class="form-inline">
+								<input id="q-404" class="search-field input-xxlarge" name="q" type="text" placeholder="Tell us more about what you're looking for...">
+									<button class="search-submit btn">Search</button>
+								</span>
+							</div>
+						</form>
+						<p>
+							<small>
+								If you feel you've reached this page in error, please let us know: <a href="https://www.ucf.edu/feedback">www.ucf.edu/feedback</a>.
+							</small>
+						</p>
+					</div>
+				</div>
+			</div>
+		<?php endif; ?>
+	</main>
 	<?php get_template_part('includes/below-the-fold'); ?>
+</article>
 <?php get_footer();?>
