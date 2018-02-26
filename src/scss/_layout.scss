@@ -32,6 +32,16 @@ img,
   }
 }
 
+img {
+  @media(max-width: $small-max-display) {
+    &.alignleft,
+    &.alignright,
+    &.aligncenter {
+      display: block;
+    }
+  }
+}
+
 .figure {
   display: table;
 
