@@ -9,8 +9,11 @@
 // Theme imports
 @import 'mixins';
 
+@import 'layout';
 @import 'views';
 @import 'type';
 @import 'parallax';
 @import 'shortcodes';
 
+// Page imports
+@import 'pages/404';
