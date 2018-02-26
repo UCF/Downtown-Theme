@@ -250,7 +250,6 @@ if ( ! function_exists( 'format_caption_shortcode' ) ) {
 		$align = $atts['align'] ?: '';
 		$class = trim( 'figure ' . $align . ' ' . $atts['class'] );
 		$html5 = current_theme_supports( 'html5' );
-		$style = isset( $atts['width'] ) ? 'style="width: ' . $atts['width'] . 'px;" ' : '';
 
 		// Add 'figure-img' class to inner <img>
 		if ( preg_match( '/<img [^>]+>/', $content, $matches ) !== false ) {
@@ -260,7 +259,7 @@ if ( ! function_exists( 'format_caption_shortcode' ) ) {
 			}
 		}
 		if ( $html5 ) {
-			$html = '<figure ' . $atts['id'] . $style . 'class="' . esc_attr( $class ) . '">'
+			$html = '<figure ' . $atts['id'] . 'class="' . esc_attr( $class ) . '">'
 			. do_shortcode( $content ) . '<figcaption class="figure-caption">' . $atts['caption'] . '</figcaption></figure>';
 		} else {
 			$html = '<div ' . $atts['id'] . 'class="' . esc_attr( $class ) . '">'
