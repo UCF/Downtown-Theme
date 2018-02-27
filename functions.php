@@ -294,7 +294,7 @@ function display_gallery_slideshow( $gallery_id, $attachments, $attr ) {
 
 			foreach ( $attachments as $attachment ):
 				$css_class = '';
-				if ( $indicatorcount == 0 ) {
+				if ( $indicatorcount === 0 ) {
 					$css_class = 'active';
 				}
 			?>
@@ -314,7 +314,7 @@ function display_gallery_slideshow( $gallery_id, $attachments, $attr ) {
 				$excerpt  = wptexturize( trim( $attachment->post_excerpt ) );
 
 				$css_class = 'item';
-				if ( $slidecount == 1 ) {
+				if ( $slidecount === 1 ) {
 					$css_class .= ' active';
 				}
 
