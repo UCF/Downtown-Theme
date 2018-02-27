@@ -23,6 +23,7 @@ var configLocal = require('./gulp-config.json'),
       dist: {
         cssPath:  './static/css',
         jsPath:   './static/js',
+        fontPath: './static/fonts',
         imgPath: './static/img'
       },
       devPath: './dev',
@@ -43,8 +44,14 @@ gulp.task('move-components-glyphicons', function() {
    .pipe(gulp.dest(config.dist.imgPath));
 });
 
+// Copy Font Awesome files
+gulp.task('move-components-fontawesome', function() {
+  gulp.src(config.packagesPath + '/font-awesome/fonts/**/*')
+   .pipe(gulp.dest(config.dist.fontPath + '/font-awesome'));
+});
+
 // Run all component-related tasks
-gulp.task('components', ['move-components-glyphicons']);
+gulp.task('components', ['move-components-glyphicons', 'move-components-fontawesome']);
 
 //
 // CSS
