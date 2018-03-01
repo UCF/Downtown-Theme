@@ -4,6 +4,7 @@
 // =require ./chart.js/Chart.js
 // =require ./@fancyapps/fancybox/dist/jquery.fancybox.js
 // =require webcom-base.js
+// =require objectFitPolyfill.js
 
 
 const Generic = {};
