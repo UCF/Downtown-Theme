@@ -31,11 +31,6 @@
 								</span>
 							</div>
 						</form>
-						<p>
-							<small>
-								If you feel you've reached this page in error, please let us know: <a href="https://www.ucf.edu/feedback">www.ucf.edu/feedback</a>.
-							</small>
-						</p>
 					</div>
 				</div>
 			</div>
