@@ -133,7 +133,7 @@ function get_page_video_markup( $page_id ) {
 	ob_start();
 	if ( $video ) :
 ?>
-	<video class="page-header-video" muted loop autoplay>
+	<video class="page-header-video" controls muted loop autoplay>
 		<source src="<?php echo $video; ?>" type="video/mp4">
 	</video>
 <?php
