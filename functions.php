@@ -515,3 +515,19 @@ function custom_gallery_settings() {
 }
 
 add_action( 'print_media_templates', 'custom_gallery_settings' );
+
+
+/**
+ * Returns a brand link for use in primary site navigation.
+ *
+ * @since v1.1.0
+ * @author Jo Dickson
+ * @return string
+ */
+function get_home_link() {
+	ob_start();
+?>
+<a class="home-link" href="<?php echo home_url(); ?>"><span class="gold-text">UCF</span> Downtown</a>
+<?php
+	return ob_get_clean();
+}

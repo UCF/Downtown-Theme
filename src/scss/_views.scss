@@ -385,27 +385,50 @@ nav {
     padding: 0 20px;
     text-transform: uppercase;
   }
+}
 
-  &.header-nav {
-    background-color: #333;
-    background-color: rgba(0, 0, 0, .8);
-    left: 0;
-    padding: 10px 0; // Creates 20px spacing btwn edges of black bar and list items
-    position: absolute;
-    right: 0;
-    top: 50px; // ucf header
-    z-index: 999;
+.header-nav {
+  @include clearfix();
+  background-color: #333;
+  background-color: rgba(0, 0, 0, .8);
+  left: 0;
+  padding: 10px 0; // Creates 20px spacing btwn edges of black bar and list items
+  position: absolute;
+  right: 0;
+  top: 50px; // ucf header
+  z-index: 999;
 
-    a,
-    a:hover {
-      color: #fff;
+  a,
+  a:hover {
+    color: #fff;
+  }
+
+  .home-link {
+    float: left;
+    padding: 4px 20px;
+
+    @media (min-width: $medium-min-display) {
+      padding-left: 0;
+    }
+
+    @media (min-width: $medium-max-display + 1) {
+      // Creates 20px spacing btwn edges of black bar and list items
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
+
+    @media (min-width: $large-min-display) {
+      padding-left: 20px;
     }
   }
 
   .menu {
     @media (min-width: $medium-max-display + 1) {
-      display: flex;
-      justify-content: space-between;
+      float: right;
+    }
+
+    @media (min-width: $medium-max-display + 1) and (max-width: $large-min-display - 1) {
+      margin-right: -20px;
     }
   }
 }
@@ -443,6 +466,11 @@ footer nav {
 
   a:hover {
     text-decoration: underline;
+  }
+
+  .home-link,
+  .menu {
+    display: inline-block;
   }
 }
 
