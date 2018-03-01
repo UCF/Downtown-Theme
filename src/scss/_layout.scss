@@ -64,7 +64,6 @@ img {
   position: absolute;
   top: 0;
   width: calc(100% + 1px);
-  z-index: 1;
 
   @media(max-width: $small-max-display) {
     display: none;
@@ -75,11 +74,11 @@ img {
   background-color: rgba(0, 0, 0, .3);
   background-image: none;
   border-color: transparent;
-  bottom: 30px;
   color: rgba(255, 255, 255, .75);
   position: absolute;
   right: 30px;
-  z-index: 2;
+  top: 75px;
+  z-index: 1;
 
   &.active,
   &:active,
