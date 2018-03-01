@@ -1,0 +1,57 @@
+.alignleft {
+  float: left;
+}
+
+.alignright {
+  float: right;
+}
+
+img,
+.figure {
+  &.alignleft {
+    margin: .35em 1.2em 1.2em 0;
+  }
+
+  &.alignright {
+    margin: .35em 0 1.2em 1.2em;
+  }
+
+  &.aligncenter {
+    margin: .35em auto;
+  }
+
+  @media(max-width: $small-max-display) {
+    &.alignleft,
+    &.alignright,
+    &.aligncenter {
+      float: none;
+      margin: 1em auto;
+    }
+  }
+}
+
+img {
+  @media(max-width: $small-max-display) {
+    &.alignleft,
+    &.alignright,
+    &.aligncenter {
+      display: block;
+    }
+  }
+}
+
+.figure {
+  display: table;
+
+  a {
+    display: block;
+    text-align: center;
+  }
+
+  .figure-caption {
+    caption-side: bottom;
+    display: table-caption;
+    font-style: italic;
+    margin-top: .35em;
+  }
+}

@@ -2,6 +2,7 @@
 // =require ./fittext/jquery.fittext.js
 // =require ./stellar/src/jquery.stellar.js
 // =require ./chart.js/Chart.js
+// =require ./@fancyapps/fancybox/dist/jquery.fancybox.js
 // =require webcom-base.js
 
 
