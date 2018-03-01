@@ -412,13 +412,6 @@ nav {
       color: #fff;
     }
   }
-
-  .menu {
-    @media (min-width: $medium-max-display + 1) {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
 }
 
 // Subpages
