@@ -52,6 +52,7 @@
 	<body class="<?php echo body_classes(); ?>">
 		<nav class="header-nav">
 			<div class="container">
+				<?php echo get_home_link(); ?>
 				<a class="mobile-nav-toggle" href="#"><div class="hamburger"></div>Menu</a>
 				<?php wp_nav_menu( array(
 					'theme_location' => 'nav-menu',
