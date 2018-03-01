@@ -4,6 +4,8 @@
 // =require ./chart.js/Chart.js
 // =require ./@fancyapps/fancybox/dist/jquery.fancybox.js
 // =require webcom-base.js
+// =require ./objectFitPolyfill/dist/objectFitPolyfill.min.js
+// =require headerVideos.js
 
 
 const Generic = {};
@@ -275,9 +277,6 @@ const socialButtonTracking = function ($) {
     } else if (link.hasClass('share-twitter')) {
       network = 'Twitter';
       socialAction = 'Tweet';
-    } else if (link.hasClass('share-googleplus')) {
-      network = 'Google+';
-      socialAction = 'Share';
     } else if (link.hasClass('share-linkedin')) {
       network = 'Linkedin';
       socialAction = 'Share';

@@ -95,7 +95,6 @@ function get_parallax_feature_css($post_id, $d_cpt_field, $t_cpt_field, $m_cpt_f
 	return ob_get_clean();
 }
 
-
 /**
  * Display a subpage parallax header image.
  **/
@@ -106,6 +105,7 @@ function get_parallax_page_header($page_id) {
 	?>
 	<section class="parallax-content parallax-header">
 		<div class="parallax-photo" id="photo_<?php echo $page_id; ?>" data-stellar-background-ratio="0.5">
+			<?php echo get_page_video_markup( $page_id ); ?>
 			<?php
 				if (get_theme_option('enable_skyline')) :
 			?>
@@ -123,6 +123,28 @@ function get_parallax_page_header($page_id) {
 	return ob_get_clean();
 }
 
+function get_page_video_markup( $page_id ) {
+	$video = null;
+
+	$video_id = get_post_meta( $page_id, 'page_video', TRUE );
+
+	$video = wp_get_attachment_url( $video_id ) ?: null;
+
+	ob_start();
+	if ( $video ) :
+?>
+	<video class="page-header-video" muted loop autoplay data-object-fit="cover">
+		<source src="<?php echo $video; ?>" type="video/mp4">
+	</video>
+	<button class="header-video-toggle btn play-enabled" type="button" data-toggle="button" aria-pressed="false" aria-label="Play or pause background videos">
+		<span class="fa fa-pause header-video-pause" aria-hidden="true"></span>
+		<span class="fa fa-play header-video-play" aria-hidden="true"></span>
+	</button>
+<?php
+	endif;
+
+	return ob_get_clean();
+}
 
 /**
  * Displays a call to action link, using the page link provided in Theme Options.
@@ -172,9 +194,6 @@ function display_social($url, $title) {
         </a>
         <a class="share-twitter" target="_blank" data-button-target="<?php echo $url; ?>" href="https://twitter.com/intent/tweet?text=<?php echo $tweet_title; ?>&url=<?php echo $url; ?>" title="Tweet this story">
             Tweet "<?php echo $title; ?>" on Twitter
-        </a>
-        <a class="share-googleplus" target="_blank" data-button-target="<?php echo $url; ?>" href="https://plus.google.com/share?url=<?php echo $url; ?>" title="Share this story on Google+">
-            Share "<?php echo $title; ?>" on Google+
         </a>
         <a class="share-linkedin" target="_blank" data-button-target="<?php echo $url; ?>" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $url; ?>&title=<?php echo $tweet_title; ?>" title="Share this story on Linkedin">
         	Share "<?php echo $title; ?>" on Linkedin

@@ -7,6 +7,7 @@
 			<article>
 				<h1><?php the_title();?></h1>
 				<div class="date"><?php echo get_post_meta($post->ID, 'update_date', True); ?></div>
+				<?php echo display_social( get_permalink( $post->ID ), $post->post_title ); ?>
 				<?php the_content();?>
 			</article>
 		</div>
