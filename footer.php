@@ -3,6 +3,7 @@
 				<div class="row">
 					<div class="span12">
 						<nav>
+							<?php echo get_home_link(); ?>
 							<?=wp_nav_menu(array(
 								'theme_location' => 'nav-menu',
 								'container' => 'false',
