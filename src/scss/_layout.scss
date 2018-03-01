@@ -65,4 +65,8 @@ img {
   top: 0;
   width: calc(100% + 1px);
   z-index: 1;
+
+  @media(max-width: $small-max-display) {
+    display: none;
+  }
 }
