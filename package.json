@@ -25,6 +25,7 @@
     "gulp-uglify": "^3.0.0",
     "merge": "^1.2.0",
     "napa": "^3.0.0",
+    "object-fit-polyfill": "^0.1.0",
     "run-sequence": "^2.2.0"
   },
   "browserslist": [
