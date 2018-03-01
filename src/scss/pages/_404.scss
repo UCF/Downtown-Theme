@@ -1,0 +1,26 @@
+body main.page-content {
+  @media(min-width: $xsmall-max-display) {
+    padding-top: 80px;
+  }
+}
+
+#q-404 {
+  width: calc(100% - 90px);
+}
+
+.knightro-bg {
+  background: none;
+  padding-right: 0;
+
+  @media(min-width: $small-max-display) {
+    background: url('../img/knightro-searching.jpg') center right no-repeat;
+    background-size: 100px auto;
+    min-height: 470px;
+    padding-right: 40px;
+  }
+
+  @media(min-width: $medium-max-display) {
+    background-position: top right;
+    background-size: auto;
+  }
+}
