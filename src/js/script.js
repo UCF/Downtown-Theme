@@ -4,7 +4,7 @@
 // =require ./chart.js/Chart.js
 // =require ./@fancyapps/fancybox/dist/jquery.fancybox.js
 // =require webcom-base.js
-// =require ./object-fit-polyfill/dist/object-fit-polyfill.js
+// =require ./objectFitPolyfill/dist/objectFitPolyfill.min.js
 // =require headerVideos.js
 
 
