@@ -259,42 +259,6 @@ class Page extends CustomPostType {
 		$use_title      = True,
 		$use_metabox    = True,
 		$built_in       = True;
-
-	public function fields() {
-		$prefix = $this->options('name').'_';
-		return array(
-			array(
-				'name' => 'Stylesheet',
-				'desc' => '',
-				'id' => $prefix.'stylesheet',
-				'type' => 'file',
-			),
-			array(
-				'name' => 'Javascript',
-				'desc' => '',
-				'id' => $prefix.'javascript',
-				'type' => 'file',
-			),
-			array(
-				'name' => 'Featured image "Desktop" size override',
-				'desc' => 'Overrides the automatically generated "Desktop" size of the featured image for this page. Recommended image size: 1199x750px.',
-				'id' => $prefix.'image_d',
-				'type' => 'file',
-			),
-			array(
-				'name' => 'Featured image "Tablet" size override',
-				'desc' => 'Overrides the automatically generated "Tablet" size of the featured image for this page. Recommended image size: 767x775px.',
-				'id' => $prefix.'image_t',
-				'type' => 'file',
-			),
-			array(
-				'name' => 'Featured image "Mobile" size override',
-				'desc' => 'Overrides the automatically generated "Mobile" size of the featured image for this page. Recommended image size: 480x475px.',
-				'id' => $prefix.'image_m',
-				'type' => 'file',
-			),
-		);
-	}
 }
 
 

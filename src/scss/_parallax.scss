@@ -47,6 +47,13 @@
     position: absolute;
     text-shadow: 0 2px 0 #000, 0 0 10px #000;
     top: 20%;
+
+    &.fa {
+      display: inline-block;
+      left: auto;
+      position: relative;
+      top: auto;
+    }
   }
 }
 
