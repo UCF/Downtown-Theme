@@ -95,7 +95,6 @@ function get_parallax_feature_css($post_id, $d_cpt_field, $t_cpt_field, $m_cpt_f
 	return ob_get_clean();
 }
 
-
 /**
  * Display a subpage parallax header image.
  **/
@@ -106,6 +105,7 @@ function get_parallax_page_header($page_id) {
 	?>
 	<section class="parallax-content parallax-header">
 		<div class="parallax-photo" id="photo_<?php echo $page_id; ?>" data-stellar-background-ratio="0.5">
+			<?php echo get_page_video_markup( $page_id ); ?>
 			<?php
 				if (get_theme_option('enable_skyline')) :
 			?>
@@ -123,6 +123,24 @@ function get_parallax_page_header($page_id) {
 	return ob_get_clean();
 }
 
+function get_page_video_markup( $page_id ) {
+	$video = null;
+
+	$video_id = get_post_meta( $page_id, 'page_video', TRUE );
+
+	$video = wp_get_attachment_url( $video_id ) ?: null;
+
+	ob_start();
+	if ( $video ) :
+?>
+	<video class="page-header-video" muted loop autoplay>
+		<source src="<?php echo $video; ?>" type="video/mp4">
+	</video>
+<?php
+	endif;
+
+	return ob_get_clean();
+}
 
 /**
  * Displays a call to action link, using the page link provided in Theme Options.

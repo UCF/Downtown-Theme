@@ -1,0 +1,154 @@
+[
+    {
+        "key": "group_5a9815202842d",
+        "title": "Page Fields",
+        "fields": [
+            {
+                "key": "field_5a9815435bc1c",
+                "label": "Stylesheet",
+                "name": "page_stylesheet",
+                "type": "file",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "id",
+                "library": "all",
+                "min_size": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5a9815735bc1d",
+                "label": "Javascript",
+                "name": "page_javascript",
+                "type": "file",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "id",
+                "library": "all",
+                "min_size": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5a98158d5bc1e",
+                "label": "Featured image \"Desktop\" size override",
+                "name": "page_image_d",
+                "type": "image",
+                "instructions": "Overrides the automatically generated \"Desktop\" size of the featured image for this page. Recommended image size: 1199x750px.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "id",
+                "preview_size": "parallax_feature-desktop",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5a9815d25bc1f",
+                "label": "Featured image \"Tablet\" size override",
+                "name": "page_image_t",
+                "type": "image",
+                "instructions": "Overrides the automatically generated \"Tablet\" size of the featured image for this page. Recommended image size: 767x775px.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "id",
+                "preview_size": "parallax_feature-tablet",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5a98160b5bc20",
+                "label": "Featured image \"Mobile\" size override",
+                "name": "page_image_m",
+                "type": "image",
+                "instructions": "Overrides the automatically generated \"Mobile\" size of the featured image for this page. Recommended image size: 480x475px.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "preview_size": "parallax_feature-mobile",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5a98162d5bc21",
+                "label": "Video Header (mp4)",
+                "name": "page_video",
+                "type": "file",
+                "instructions": "Video to display at the \"Desktop\" size",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "id",
+                "library": "all",
+                "min_size": "",
+                "max_size": "",
+                "mime_types": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "page"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    }
+]

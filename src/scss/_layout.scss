@@ -56,3 +56,13 @@ img {
     margin-top: .35em;
   }
 }
+
+.page-header-video {
+  height: calc(100% + 1px);
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: calc(100% + 1px);
+  z-index: 1;
+}
