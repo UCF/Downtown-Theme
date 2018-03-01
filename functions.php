@@ -173,9 +173,6 @@ function display_social($url, $title) {
         <a class="share-twitter" target="_blank" data-button-target="<?php echo $url; ?>" href="https://twitter.com/intent/tweet?text=<?php echo $tweet_title; ?>&url=<?php echo $url; ?>" title="Tweet this story">
             Tweet "<?php echo $title; ?>" on Twitter
         </a>
-        <a class="share-googleplus" target="_blank" data-button-target="<?php echo $url; ?>" href="https://plus.google.com/share?url=<?php echo $url; ?>" title="Share this story on Google+">
-            Share "<?php echo $title; ?>" on Google+
-        </a>
         <a class="share-linkedin" target="_blank" data-button-target="<?php echo $url; ?>" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $url; ?>&title=<?php echo $tweet_title; ?>" title="Share this story on Linkedin">
         	Share "<?php echo $title; ?>" on Linkedin
         </a>

@@ -275,9 +275,6 @@ const socialButtonTracking = function ($) {
     } else if (link.hasClass('share-twitter')) {
       network = 'Twitter';
       socialAction = 'Tweet';
-    } else if (link.hasClass('share-googleplus')) {
-      network = 'Google+';
-      socialAction = 'Share';
     } else if (link.hasClass('share-linkedin')) {
       network = 'Linkedin';
       socialAction = 'Share';
