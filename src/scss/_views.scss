@@ -264,7 +264,6 @@ button.btn {
 // Social Buttons
 .share-twitter,
 .share-facebook,
-.share-googleplus,
 .share-linkedin,
 .share-email {
   @include sprite('../img/social-share-extended.png', '../img/social-share-extended-r.png', 354px, 62px);
@@ -291,16 +290,6 @@ button.btn {
   &:active,
   &:focus {
     background-position: 0 -31px;
-  }
-}
-
-.share-googleplus {
-  background-position: -142px 0;
-
-  &:hover,
-  &:active,
-  &:focus {
-    background-position: -142px -31px;
   }
 }
 
