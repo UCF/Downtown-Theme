@@ -4,7 +4,8 @@
 // =require ./chart.js/Chart.js
 // =require ./@fancyapps/fancybox/dist/jquery.fancybox.js
 // =require webcom-base.js
-// =require objectFitPolyfill.js
+// =require ./objectFitPolyfill/dist/objectFitPolyfill.min.js
+// =require headerVideos.js
 
 
 const Generic = {};
