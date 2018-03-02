@@ -5,6 +5,7 @@ WordPress theme built off of UCF's Generic theme for UCF's Downtown Orlando Site
 
 ## Installation Requirements:
 * GravityForms
+* Advanced Custom Fields Pro
 
 
 ## Deployment
