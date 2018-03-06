@@ -140,7 +140,7 @@ function cssDevWatch(event) {
 // JavaScript
 //
 
-// Run eshint on js files in src.jsPath. Do not perform linting
+// Run eslint on js files in src.jsPath. Do not perform linting
 // on vendor js files.
 gulp.task('es-lint', function() {
   return gulp.src([config.src.jsPath + '/*.js'])
