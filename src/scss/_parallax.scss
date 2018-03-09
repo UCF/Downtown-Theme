@@ -1,12 +1,10 @@
-/**
- * Parallax image dimension responsive overrides:
- *
- * Note the naming conventions differ slightly from Bootstrap 2's device size naming.
- *
- * Height of these images should be set based on the background-ratio set on the element.
- * Setting a higher background-ratio will require a taller image to prevent white-space
- * from where the background image is pushed upward on scroll.
- **/
+ // Parallax image dimension responsive overrides:
+ //
+ // Note the naming conventions differ slightly from Bootstrap 2's device size naming.
+ //
+ // Height of these images should be set based on the background-ratio set on the element.
+ // Setting a higher background-ratio will require a taller image to prevent white-space
+ // from where the background image is pushed upward on scroll.
 
 // Parallax Features, Parallax Headers
 .parallax-content {
@@ -21,8 +19,7 @@
     left: auto;
 
     a {
-      background-color: $alt-color;
-      background-color: rgba(245, 192, 13, .95);
+      @include background-opacity($alt-color, #f5c00d, .95);
     }
   }
 }
@@ -35,8 +32,6 @@
   box-sizing: border-box;
   padding: 100px 0;
   position: relative;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
 
   span {
     color: #fff;
@@ -62,8 +57,8 @@
   padding-top: 0;
 
   .skyline {
-    background-image: url('../img/header-skyline.png');
     @include background-size(cover);
+    background-image: url('../img/header-skyline.png');
     background-repeat: no-repeat;
     bottom: 0;
     height: 100px;
@@ -114,7 +109,7 @@
   display: block;
   font-size: 120px;
   left: 0;
-  line-height: 1em;
+  line-height: 1;
   position: absolute;
   text-shadow: 0 1px 2px rgba(0, 0, 0, .65);
   width: 70%;
@@ -214,7 +209,7 @@
     bottom: auto;
     font-size: 70px;
     left: 0;
-    line-height: 1em;
+    line-height: 1;
     position: absolute;
     right: 0;
     text-align: center;

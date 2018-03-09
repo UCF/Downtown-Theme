@@ -1,5 +1,4 @@
 .recent-updates {
-
   .update-list {
     list-style-type: none;
     padding-left: 0;
@@ -12,94 +11,88 @@
       padding-left: 20px;
       padding-right: 20px;
     }
+  }
 
-    .update-story {
-      margin-bottom: 10px;
-      margin-top: 10px;
-      position: relative;
+  .update-story {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    position: relative;
 
-      &:hover:after,
-      &:focus:after,
-      &:active:after {
-        @include transition(all .15s ease-in-out);
-        bottom: 0;
-        right: -20px;
+    &:hover::after,
+    &:focus::after,
+    &:active::after {
+      @include transition(all .15s ease-in-out);
+      bottom: 0;
+      right: -20px;
 
-        @media(max-width: $large-min-display) {
-          right: 0;
-        }
-
-        @media(max-width: $small-max-display) {
-          bottom: 10px;
-        }
+      @media(max-width: $large-min-display) {
+        right: 0;
       }
 
-      &:after {
-        border-color: transparent transparent #54972c;
-        border-style: solid;
-        border-width: 0 0 12px 12px;
-        bottom: -2px;
-        content: '';
-        display: block;
-        height: 12px;
-        position: absolute;
-        right: -22px;
-        width: 0;
-
-        @media(max-width: $large-min-display) {
-          right: -2px;
-        }
-      }
-
-      &.span3:after {
-        @media(max-width: $small-max-display) {
-          bottom: 8px;
-        }
+      @media(max-width: $small-max-display) {
+        bottom: 10px;
       }
     }
 
-    .span3 .update-title {
-      @media(min-width: $medium-min-display) and (max-width: $medium-max-display) {
-        height: 130px;
+    &::after {
+      border-color: transparent transparent #54972c;
+      border-style: solid;
+      border-width: 0 0 12px 12px;
+      bottom: -2px;
+      content: '';
+      display: block;
+      height: 12px;
+      position: absolute;
+      right: -22px;
+      width: 0;
+
+      @media(max-width: $large-min-display) {
+        right: -2px;
+      }
+    }
+
+    &.span3::after {
+      @media(max-width: $small-max-display) {
+        bottom: 8px;
       }
     }
 
     .update-title {
-      @include color-block($offwhite, 2px, 2px, 0, 0, darken($offwhite, 5%));
-
-      -o-transition: all 0.15s ease-in-out;
-      -webkit-transition: all 0.15s ease-in-out;
-      transition: all 0.15s ease-in-out;
+      @include color-block($off-white, 2px, 2px, 0, 0, darken($off-white, 5%));
       background-color: #fafafa;
       box-shadow: 2px 2px 0 0 #ededed;
       display: block;
-      font-family: "Montserrat",sans-serif;
+      font-family: "Montserrat", sans-serif;
       font-size: 16px;
       font-weight: normal;
       height: 90px;
-      line-height: 1.4em;
+      line-height: 1.4;
       margin-bottom: 0;
       margin-top: 0;
       overflow: hidden;
       padding: 10px;
+      transition: all .15s ease-in-out;
       width: 100%;
 
       @media(max-width: $large-min-display) {
         width: auto;
       }
-    }
 
-    a {
-      -o-transition: all 0.15s ease-in-out;
-      -webkit-transition: all 0.15s ease-in-out;
-      color: #000;
-      display: block;
-      height: 100%;
-      width: 100%;
-
-      &:hover {
-        text-decoration: none;
+      @media(min-width: $medium-min-display) and (max-width: $medium-max-display) {
+        height: 130px;
       }
+    }
+  }
+
+  a {
+    color: #000;
+    display: block;
+    height: 100%;
+    transition: all .15s ease-in-out;
+    width: 100%;
+
+    &:hover {
+      text-decoration: none;
     }
   }
 }
@@ -142,7 +135,7 @@
 
   .faq-question {
     font-size: 18px;
-    line-height: 1.3em;
+    line-height: 1.3;
     text-transform: uppercase;
   }
 
@@ -203,35 +196,35 @@
 
   ul {
     list-style-type: none;
+  }
 
-    li {
-      &.pdf {
-        list-style-image: url('../img/documents-pdf.png');
-      }
+  li {
+    &.pdf {
+      list-style-image: url('../img/documents-pdf.png');
+    }
 
-      &.word {
-        list-style-image: url('../img/documents-word.png');
-      }
+    &.word {
+      list-style-image: url('../img/documents-word.png');
+    }
 
-      &.document {
-        list-style-image: url('../img/documents-doc.png');
-      }
+    &.document {
+      list-style-image: url('../img/documents-doc.png');
+    }
 
-      &.zip {
-        list-style-image: url('../img/documents-zip.png');
-      }
+    &.zip {
+      list-style-image: url('../img/documents-zip.png');
+    }
 
-      &.excel {
-        list-style-image: url('../img/documents-excel.png');
-      }
+    &.excel {
+      list-style-image: url('../img/documents-excel.png');
+    }
 
-      &.powerpoint {
-        list-style-image: url('../img/documents-ppt.png');
-      }
+    &.powerpoint {
+      list-style-image: url('../img/documents-ppt.png');
+    }
 
-      &.html {
-        list-style-image: url('../img/documents-html.png');
-      }
+    &.html {
+      list-style-image: url('../img/documents-html.png');
     }
   }
 }
@@ -241,7 +234,8 @@
     font-family: "Montserrat", sans-serif;
     font-size: 15px;
 
-    &.events tbody tr:nth-child(2n+1) td, table.events tbody tr:nth-child(2n+1) th {
+    &.events tbody tr:nth-child(2n+1) td,
+    table.events tbody tr:nth-child(2n+1) th {
       background-color: $light-yellow-color;
       border-top: 1px solid $alt-color;
     }
@@ -252,7 +246,7 @@
   }
 
   .location {
-    line-height: 13px;
+    line-height: .9;
 
     a {
       color: #666;

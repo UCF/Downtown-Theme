@@ -1,4 +1,3 @@
-// General
 body {
   position: relative;
 }
@@ -17,7 +16,7 @@ li {
   font-size: 16px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  line-height: 26px;
+  line-height: 1.65;
 }
 
 h2,
@@ -99,7 +98,7 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: 1.2em;
+  line-height: 1.2;
   text-transform: capitalize;
 }
 
@@ -139,7 +138,7 @@ blockquote p {
   font-size: 32px;
   font-style: normal;
   font-weight: 200;
-  line-height: 1.3em;
+  line-height: 1.3;
 }
 
 blockquote {
@@ -153,7 +152,7 @@ blockquote {
     font-size: 20px;
     font-style: italic;
     font-weight: 500;
-    line-height: 1.3em;
+    line-height: 1.3;
     margin-top: 20px;
     text-align: left;
   }
@@ -190,7 +189,7 @@ button.btn {
   font-size: 14px;
   -moz-osx-font-smoothing: auto;
   -webkit-font-smoothing: auto;
-  line-height: 1.2em;
+  line-height: 1.2;
 }
 
 .carousel-inner > .item > img,
@@ -199,8 +198,7 @@ button.btn {
 }
 
 .callout {
-  background-color: #fcc904;
-  background-color: rgba(245, 192, 13, .95);
+  @include background-opacity($alt-color, #f5c00d, .95);
   box-shadow: -4px -3px 8px 0 rgba(50, 50, 50, .75);
   display: block;
   padding: 20px;
@@ -216,7 +214,7 @@ button.btn {
       font-size: 26px;
       font-style: normal;
       font-weight: 400;
-      line-height: 1.2em;
+      line-height: 1.2;
     }
   }
 
@@ -227,7 +225,7 @@ button.btn {
     font-size: 48px;
     font-weight: 700;
     letter-spacing: -.025em;
-    line-height: 1em;
+    line-height: 1;
   }
 }
 
@@ -247,7 +245,7 @@ button.btn {
     font-style: normal;
     font-weight: 800;
     letter-spacing: -.025em;
-    line-height: 1em;
+    line-height: 1;
     margin: auto;
     padding: 25px 0;
     text-decoration: underline;
@@ -365,13 +363,13 @@ nav {
   text-align: center;
 
   ul {
-    line-height: 1em;
+    line-height: 1;
     list-style-type: none;
     margin: 0;
 
     li {
       display: inline-block;
-      line-height: 1em;
+      line-height: 1;
       padding: 10px 0;
     }
   }
@@ -381,7 +379,7 @@ nav {
     font-size: 17px;
     font-style: normal;
     font-weight: 800;
-    line-height: 1em;
+    line-height: 1;
     padding: 0 20px;
     text-transform: uppercase;
   }
@@ -389,8 +387,7 @@ nav {
 
 .header-nav {
   @include clearfix();
-  background-color: #333;
-  background-color: rgba(0, 0, 0, .8);
+  @include background-opacity(#333, #000, .8);
   left: 0;
   padding: 10px 0; // Creates 20px spacing btwn edges of black bar and list items
   position: absolute;
@@ -480,7 +477,7 @@ footer nav {
   font-style: normal;
   font-weight: 200;
   letter-spacing: -.045em;
-  line-height: 1.25em;
+  line-height: 1.25;
   margin-bottom: 80px;
   margin-top: 40px;
   text-align: center;
@@ -550,7 +547,7 @@ footer nav {
   h1,
   .h1 {
     font-size: 38px;
-    line-height: 1.3em;
+    line-height: 1.3;
   }
 
   h2,
@@ -629,7 +626,7 @@ footer nav {
   .callout blockquote,
   .callout blockquote p {
     font-size: 45px;
-    line-height: 50px;
+    line-height: 1.2;
   }
 
   .whitespace-2x {
@@ -653,7 +650,7 @@ footer nav {
   ul,
   li {
     font-size: 15px;
-    line-height: 24px;
+    line-height: 1.6;
   }
 
   blockquote,
@@ -677,7 +674,7 @@ footer nav {
   }
 
   .caption {
-    line-height: 1.35em;
+    line-height: 1.35;
     padding-bottom: 15px;
   }
 
@@ -713,7 +710,7 @@ footer nav {
 
   .footer-cta {
     font-size: 28px;
-    line-height: 36px;
+    line-height: 1.286;
     padding: 0 20px;
   }
 }
@@ -722,7 +719,7 @@ footer nav {
   .callout blockquote,
   .callout blockquote p {
     font-size: 34px;
-    line-height: 44px;
+    line-height: 1.294;
   }
 
   .callout blockquote small {
@@ -744,7 +741,7 @@ footer nav {
   .callout blockquote,
   .callout blockquote p {
     font-size: 25px;
-    line-height: 28px;
+    line-height: 1.120;
   }
 
   .callout blockquote small {

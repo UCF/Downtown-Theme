@@ -1,6 +1,6 @@
 $fa-font-path: '../fonts/font-awesome';
-$iconSpritePath:      "../img/glyphicons-halflings.png";
-$iconWhiteSpritePath: "../img/glyphicons-halflings-white.png";
+$iconSpritePath:      '../img/glyphicons-halflings.png';
+$iconWhiteSpritePath: '../img/glyphicons-halflings-white.png';
 
 $large-min-display:   1200px;
 $medium-max-display:  979px;
@@ -8,11 +8,16 @@ $medium-min-display:  768px;
 $small-max-display:   767px;
 $xsmall-max-display:  480px;
 
-$offwhite:            #fafafa;
+$off-white:            #fafafa;
 $alt-color:           #dfaf0d;
-$linkColor:           #922 !default;
+$linkColor:           #922;
 $light-yellow-color:  #fcebb1;
 
-$font-family-heading: 'Gotham SSm 8r','Gotham SSm A','Gotham SSm B';
+@mixin background-opacity($fallback, $color, $opacity: .3) {
+  background-color: $fallback; // The fallback
+  background-color: rgba($color, $opacity);
+}
+
+$font-family-heading: 'Gotham SSm 8r', 'Gotham SSm A', 'Gotham SSm B';
 $font-family-h2-h6:   'Gotham SSm 7r', 'Gotham SSm A', 'Gotham SSm B';
 $font-family-block:   'Gotham SSm 2r', 'Gotham SSm A', 'Gotham SSm B';
