@@ -1,20 +1,27 @@
 // Adds filter method to array objects
 // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/filter
+
 if (!Array.prototype.filter) {
   Array.prototype.filter = function (a) {
-
-
     if (this === void 0 || this === null) {
       throw new TypeError();
-    } const b = Object(this); const c = b.length >>> 0; if (typeof a !== 'function') {
+    }
+    const b = Object(this);
+    const c = b.length >>> 0;
+    if (typeof a !== 'function') {
       throw new TypeError();
-    } const d = []; const e = arguments[1]; for (let f = 0; f < c; f++) {
+    }
+    const d = [];
+    const e = arguments[1];
+    for (let f = 0; f < c; f++) {
       if (f in b) {
-        const g = b[f]; if (a.call(e, g, f, b)) {
+        const g = b[f];
+        if (a.call(e, g, f, b)) {
           d.push(g);
         }
       }
-    } return d;
+    }
+    return d;
   };
 }
 
@@ -29,10 +36,11 @@ WebcomAdmin.__init__ = function ($) {
 
 
 WebcomAdmin.shortcodeTool = function ($) {
-  cls         = this;
+  const cls   = this;
   cls.metabox = $('#shortcodes-metabox');
   if (cls.metabox.length < 1) {
-    console.log('no meta'); return;
+    console.log('no meta');
+    return;
   }
 
   cls.form     = cls.metabox.find('form');
@@ -40,11 +48,11 @@ WebcomAdmin.shortcodeTool = function ($) {
   cls.button   = cls.metabox.find('button');
   cls.results  = cls.metabox.find('#shortcode-results');
   cls.select   = cls.metabox.find('#shortcode-select');
-  cls.form_url = cls.metabox.find('#shortcode-form').val();
-  cls.text_url = cls.metabox.find('#shortcode-text').val();
+  cls.formURL  = cls.metabox.find('#shortcode-form').val();
+  cls.textURL  = cls.metabox.find('#shortcode-text').val();
 
   cls.shortcodes = (function () {
-    const shortcodes = new Array();
+    const shortcodes = [];
     cls.select.children('.shortcode').each(function () {
       shortcodes.push($(this).val());
     });
@@ -136,7 +144,7 @@ WebcomAdmin.shortcodeTool = function ($) {
 
 
 WebcomAdmin.themeOptions = function ($) {
-  cls          = this;
+  const cls    = this;
   cls.active   = null;
   cls.parent   = $('.i-am-a-fancy-admin');
   cls.sections = $('.i-am-a-fancy-admin .fields .section');
@@ -171,7 +179,7 @@ WebcomAdmin.themeOptions = function ($) {
       cls.buttons.filter(`[href="${window.location.hash}"]`).click();
     }
 
-    var fadeTimer = setInterval(() => {
+    const fadeTimer = setInterval(() => {
       $('.updated').fadeOut(1000);
       clearInterval(fadeTimer);
     }, 2000);

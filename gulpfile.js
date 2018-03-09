@@ -149,7 +149,7 @@ gulp.task('es-lint', function() {
     .pipe(isFixed(config.src.jsPath));
 });
 
-// Concat and uglify js files through babel
+// Uglify js files through babel
 gulp.task('js-build', function() {
   return gulp.src(config.src.jsPath + '/script.js')
     .pipe(include({
@@ -163,9 +163,23 @@ gulp.task('js-build', function() {
     .pipe(browserSync.stream());
 });
 
+// Uglify admin js through babel
+gulp.task('js-admin-build', function () {
+  return gulp.src(config.src.jsPath + '/admin.js')
+    .pipe(include({
+      includePaths: [config.packagesPath, config.src.jsPath]
+    }))
+    .on('error', console.log)
+    .pipe(babel())
+    .pipe(uglify())
+    .pipe(rename('admin.min.js'))
+    .pipe(gulp.dest(config.dist.jsPath))
+    .pipe(browserSync.stream());
+});
+
 // All js-related tasks
 gulp.task('js', function() {
-  runSequence('es-lint', 'js-build');
+  runSequence('es-lint', 'js-build', 'js-admin-build');
 });
 
 
