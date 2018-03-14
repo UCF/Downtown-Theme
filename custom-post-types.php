@@ -456,13 +456,8 @@ class Update extends CustomPostType {
 	}
 
 	public function toHTML( $object ) {
-		$excerpt_length = apply_filters( 'excerpt_length', 55 );
-  		$excerpt_more   = apply_filters( 'excerpt_more', ' ' . '[&hellip;]' );
-  		$excerpt        = wp_trim_words( $object->post_content, $excerpt_length, $excerpt_more );
-		$excerpt        = apply_filters( 'get_the_excerpt', $excerpt );
-
 		$html = '<a href="' . get_permalink( $object->ID ) . '"><h3 class="update-title">' . $object->post_title . '</h3></a>' . '<span>' . get_post_meta($object->ID, 'update_date', True) . '</span>';
-		$html = $html . '<div class="update-excerpt">' . $excerpt . '</div>';
+		$html = $html . '<div class="update-excerpt">' . wp_trim_words( strip_shortcodes( $object->post_content ), 55, ' [&hellip;]' ) . '</div>';
 		return $html;
 	}
 }
