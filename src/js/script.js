@@ -355,7 +355,6 @@ const customChart = function ($) {
 
 if (typeof jQuery !== 'undefined') {
   jQuery(document).ready(($) => {
-    Webcom.analytics($);
     Webcom.handleExternalLinks($);
     Webcom.loadMoreSearchResults($);
 
