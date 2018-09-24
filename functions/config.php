@@ -105,9 +105,9 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['gw_verify'],
 		)),
 		new TextField(array(
-			'name'        => 'Google Analytics Account',
+			'name'        => 'Google Tag Manager Container ID',
 			'id'          => THEME_OPTIONS_NAME.'[ga_account]',
-			'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
+			'description' => 'The ID for the container in Google Tag Manager that represents this site.',
 			'default'     => null,
 			'value'       => $theme_options['ga_account'],
 		)),
