@@ -10,21 +10,19 @@
 
 		<script type="text/javascript">
 			var _sf_startpt = (new Date()).getTime();
+
 			<?php if(GA_ACCOUNT):?>
-
-			var GA_ACCOUNT  = '<?=GA_ACCOUNT?>';
-			var _gaq        = _gaq || [];
-			_gaq.push(['_setAccount', GA_ACCOUNT]);
-			_gaq.push(['_setDomainName', 'none']);
-			_gaq.push(['_setAllowLinker', true]);
-			_gaq.push(['_trackPageview']);
+			<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','<?=GA_ACCOUNT?>');</script>
 			<?php endif;?>
-			<?php if(CB_UID):?>
 
+			<?php if(CB_UID):?>
 			var CB_UID      = '<?=CB_UID?>';
 			var CB_DOMAIN   = '<?=CB_DOMAIN?>';
 			<?php endif?>
-
 		</script>
 		<?php endif;?>
 
@@ -50,6 +48,11 @@
 
 	</head>
 	<body class="<?php echo body_classes(); ?>">
+		<?php if(GA_ACCOUNT):?>
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?=GA_ACCOUNT?>"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<?php endif;?>
+
 		<nav class="header-nav">
 			<div class="container">
 				<?php echo get_home_link(); ?>
